@@ -4,13 +4,24 @@ namespace Nokubico.Domain.Entities
 {
     public class WalletTx
     {
-        public Guid Id { get; set; }
-        public Guid WalletId { get; set; }
-        public string Type { get; set; } = null!;
-        public long Amount { get; set; }
-        public long BalanceBefore { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public Guid Id { get; private set; }
+        public Guid WalletId { get; private set; }
+        public string Type { get; private set; } = null!;
+        public long Amount { get; private set; }
+        public long BalanceBefore { get; private set; }
+        public DateTime CreatedAt { get; private set; }
 
-        public Wallet? Wallet { get; set; }
+        public Wallet? Wallet { get; private set; }
+
+        public void SetWallet(Wallet wallet)
+        {
+            Wallet = wallet;
+            WalletId = wallet.Id;
+        }
+
+        public void SetAmount(long amount)
+        {
+            Amount = amount;
+        }
     }
 }

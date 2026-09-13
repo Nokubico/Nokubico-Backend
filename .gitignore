@@ -1,0 +1,61 @@
+.vs/
+# Visual Studio user options
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build folders
+bin/
+obj/
+out/
+publish/
+artifacts/
+
+# Rider
+.idea/
+
+# VS Code
+.vscode/
+
+# NuGet
+*.nupkg
+packages/
+.nuget/
+
+# Dotnet
+project.lock.json
+project.fragment.lock.json
+*.DotSettings.user
+
+# User secrets and local settings
+secrets.json
+appsettings.*.json
+local.settings.json
+
+# Database files
+*.db
+*.sqlite
+*.db-shm
+*.db-wal
+
+# Logs
+*.log
+
+# Coverage
+coverage*/
+*.coverage
+*.coveragexml
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Node
+node_modules/
+
+# Generated files
+*.generated.cs
+
+# Docker
+docker-compose.override.yml

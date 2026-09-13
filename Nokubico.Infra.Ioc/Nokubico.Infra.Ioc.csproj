@@ -11,5 +11,8 @@
     <ProjectReference Include="..\Nokubico.Domain\Nokubico.Domain.csproj" />
     <ProjectReference Include="..\Nokubico.Infra.Data\Nokubico.Infra.Data.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.3" />
+  </ItemGroup>
 
 </Project>

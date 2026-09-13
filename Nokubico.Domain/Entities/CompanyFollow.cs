@@ -4,9 +4,15 @@ namespace Nokubico.Domain.Entities
 {
     public class CompanyFollow
     {
-        public Guid Id { get; set; }
-        public Guid CompanyId { get; set; }
-        public Guid UserId { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public Guid Id { get; private set; }
+        public Guid CompanyId { get; private set; }
+        public Guid UserId { get; private set; }
+        public DateTime CreatedAt { get; private set; }
+
+        public void SetCompanyAndUser(Guid companyId, Guid userId)
+        {
+            CompanyId = companyId;
+            UserId = userId;
+        }
     }
 }

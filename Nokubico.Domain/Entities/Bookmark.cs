@@ -4,9 +4,15 @@ namespace Nokubico.Domain.Entities
 {
     public class Bookmark
     {
-        public Guid Id { get; set; }
-        public Guid UserId { get; set; }
-        public Guid PostId { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public Guid Id { get; private set; }
+        public Guid UserId { get; private set; }
+        public Guid PostId { get; private set; }
+        public DateTime CreatedAt { get; private set; }
+
+        public void SetUserAndPost(Guid userId, Guid postId)
+        {
+            UserId = userId;
+            PostId = postId;
+        }
     }
 }

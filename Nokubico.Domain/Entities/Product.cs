@@ -6,20 +6,53 @@ namespace Nokubico.Domain.Entities
 {
     public class Product : BaseEntity
     {
-        public string? Title { get; set; }
-        public string? Slug { get; set; }
-        public string? Description { get; set; }
-        public string? Category { get; set; }
-        public long Price { get; set; }
-        public string Currency { get; set; } = "USD";
-        public string? Thumbnail { get; set; }
-        public string? License { get; set; }
-        public string? DownloadUrl { get; set; }
-        public Guid CreatorId { get; set; }
-        public ProductStatus Status { get; set; }
+        public string? Title { get; private set; }
+        public string? Slug { get; private set; }
+        public string? Description { get; private set; }
+        public string? Category { get; private set; }
+        public long Price { get; private set; }
+        public string Currency { get; private set; } = "USD";
+        public string? Thumbnail { get; private set; }
+        public string? License { get; private set; }
+        public string? DownloadUrl { get; private set; }
+        public Guid CreatorId { get; private set; }
+        public ProductStatus Status { get; private set; }
 
-        public ICollection<ProductImage>? Images { get; set; }
-        public ICollection<OrderItem>? OrderItems { get; set; }
-        public ICollection<Review>? Reviews { get; set; }
+        public ICollection<ProductImage> Images { get; private set; } = new List<ProductImage>();
+        public ICollection<OrderItem> OrderItems { get; private set; } = new List<OrderItem>();
+        public ICollection<Review> Reviews { get; private set; } = new List<Review>();
+
+        public void SetTitle(string? title)
+        {
+            Title = title;
+            Touch();
+        }
+
+        public void SetPrice(long price)
+        {
+            Price = price;
+            Touch();
+        }
+
+        public void SetCurrency(string currency)
+        {
+            Currency = currency;
+            Touch();
+        }
+
+        public void AddImage(ProductImage img)
+        {
+            if (img != null) Images.Add(img);
+        }
+
+        public void AddOrderItem(OrderItem item)
+        {
+            if (item != null) OrderItems.Add(item);
+        }
+
+        public void AddReview(Review review)
+        {
+            if (review != null) Reviews.Add(review);
+        }
     }
 }

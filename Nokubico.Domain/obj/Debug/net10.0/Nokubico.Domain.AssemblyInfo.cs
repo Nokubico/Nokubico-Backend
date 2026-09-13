@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Nokubico.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ca80d99de6858a0b07dafd01459bf3084d700881")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fd671ae0f55d193e27de72cd7bfb06e9d5b4977c")]
 [assembly: System.Reflection.AssemblyProductAttribute("Nokubico.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Nokubico.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
