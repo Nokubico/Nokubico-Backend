@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="Nokubico.API/Nokubico.API.csproj" Id="635ea031-3995-4e6f-aa21-7e22698f8d9d" />
+  <Project Path="Nokubico.Application/Nokubico.Application.csproj" Id="2de00031-c3ef-4277-abc2-5f5aabe33a3b" />
+  <Project Path="Nokubico.Domain/Nokubico.Domain.csproj" Id="eaff85b7-fb32-4893-be76-7fe8c7591d59" />
+  <Project Path="Nokubico.Infra.Data/Nokubico.Infra.Data.csproj" Id="d7449358-39c9-42bb-a9a0-eed925442b7f" />
+  <Project Path="Nokubico.Infra.Ioc/Nokubico.Infra.Ioc.csproj" Id="dcd47770-cd7c-46b4-8da6-fbc143d7094d" />
+</Solution>

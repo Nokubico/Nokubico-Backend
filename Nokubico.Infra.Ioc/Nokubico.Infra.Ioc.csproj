@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Nokubico.Application\Nokubico.Application.csproj" />
+    <ProjectReference Include="..\Nokubico.Domain\Nokubico.Domain.csproj" />
+    <ProjectReference Include="..\Nokubico.Infra.Data\Nokubico.Infra.Data.csproj" />
+  </ItemGroup>
+
+</Project>

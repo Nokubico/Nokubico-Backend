@@ -1,0 +1,180 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Nokubico.Domain.Entities;
+
+namespace Nokubico.Infra.Data.Context
+{
+    public class AppDbContext : DbContext
+    {
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
+        }
+
+        public DbSet<User> Users => Set<User>();
+        public DbSet<Account> Accounts => Set<Account>();
+        public DbSet<Session> Sessions => Set<Session>();
+        public DbSet<Product> Products => Set<Product>();
+        public DbSet<ProductImage> ProductImages => Set<ProductImage>();
+        public DbSet<Wallet> Wallets => Set<Wallet>();
+        public DbSet<WalletTx> WalletTxs => Set<WalletTx>();
+        public DbSet<Post> Posts => Set<Post>();
+        public DbSet<Like> Likes => Set<Like>();
+        public DbSet<Comment> Comments => Set<Comment>();
+        public DbSet<Share> Shares => Set<Share>();
+        public DbSet<Bookmark> Bookmarks => Set<Bookmark>();
+        public DbSet<Order> Orders => Set<Order>();
+        public DbSet<OrderItem> OrderItems => Set<OrderItem>();
+        public DbSet<Review> Reviews => Set<Review>();
+        public DbSet<Conversation> Conversations => Set<Conversation>();
+        public DbSet<ConversationParticipant> ConversationParticipants => Set<ConversationParticipant>();
+        public DbSet<Message> Messages => Set<Message>();
+        public DbSet<MessageAttachment> MessageAttachments => Set<MessageAttachment>();
+        public DbSet<Company> Companies => Set<Company>();
+        public DbSet<CompanyMember> CompanyMembers => Set<CompanyMember>();
+        public DbSet<CompanyFollow> CompanyFollows => Set<CompanyFollow>();
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Configure tables and keys - minimal explicit mapping to keep snake_case table names
+            modelBuilder.Entity<User>(b =>
+            {
+                b.ToTable("\"user\"");
+                b.HasKey(x => x.Id);
+                b.Property(x => x.Email).IsRequired().HasMaxLength(255).HasColumnName("email");
+                b.Property(x => x.Name).IsRequired().HasMaxLength(120).HasColumnName("name");
+            });
+
+            modelBuilder.Entity<Account>(b =>
+            {
+                b.ToTable("account");
+                b.HasKey(x => x.Id);
+                b.HasOne(x => x.User).WithMany(u => u.Accounts).HasForeignKey(x => x.UserId);
+            });
+
+            modelBuilder.Entity<Session>(b =>
+            {
+                b.ToTable("session");
+                b.HasKey(x => x.Id);
+                b.HasOne(x => x.User).WithMany(u => u.Sessions).HasForeignKey(x => x.UserId);
+            });
+
+            modelBuilder.Entity<Product>(b =>
+            {
+                b.ToTable("product");
+                b.HasKey(x => x.Id);
+                b.Property(x => x.Price).IsRequired();
+            });
+
+            modelBuilder.Entity<ProductImage>(b =>
+            {
+                b.ToTable("product_image");
+                b.HasKey(x => new { x.ProductId, x.ImageUrl });
+                b.HasOne(x => x.Product).WithMany(p => p.Images).HasForeignKey(x => x.ProductId);
+            });
+
+            modelBuilder.Entity<Wallet>(b =>
+            {
+                b.ToTable("wallets");
+                b.HasKey(x => x.Id);
+            });
+
+            modelBuilder.Entity<WalletTx>(b =>
+            {
+                b.ToTable("wallet_txs");
+                b.HasKey(x => x.Id);
+                b.HasOne(x => x.Wallet).WithMany(w => w.Transactions).HasForeignKey(x => x.WalletId);
+            });
+
+            modelBuilder.Entity<Post>(b =>
+            {
+                b.ToTable("post");
+                b.HasKey(x => x.Id);
+            });
+
+            modelBuilder.Entity<Like>(b =>
+            {
+                b.ToTable("\"like\"");
+                b.HasKey(x => x.Id);
+            });
+
+            modelBuilder.Entity<Comment>(b =>
+            {
+                b.ToTable("comment");
+                b.HasKey(x => x.Id);
+            });
+
+            modelBuilder.Entity<Share>(b =>
+            {
+                b.ToTable("share");
+                b.HasKey(x => x.Id);
+            });
+
+            modelBuilder.Entity<Bookmark>(b =>
+            {
+                b.ToTable("bookmark");
+                b.HasKey(x => x.Id);
+            });
+
+            modelBuilder.Entity<Order>(b =>
+            {
+                b.ToTable("\"order\"");
+                b.HasKey(x => x.Id);
+            });
+
+            modelBuilder.Entity<OrderItem>(b =>
+            {
+                b.ToTable("order_item");
+                b.HasKey(x => x.Id);
+            });
+
+            modelBuilder.Entity<Review>(b =>
+            {
+                b.ToTable("review");
+                b.HasKey(x => x.Id);
+            });
+
+            modelBuilder.Entity<Conversation>(b =>
+            {
+                b.ToTable("conversations");
+                b.HasKey(x => x.Id);
+            });
+
+            modelBuilder.Entity<ConversationParticipant>(b =>
+            {
+                b.ToTable("conversation_participants");
+                b.HasKey(x => x.Id);
+            });
+
+            modelBuilder.Entity<Message>(b =>
+            {
+                b.ToTable("messages");
+                b.HasKey(x => x.Id);
+            });
+
+            modelBuilder.Entity<MessageAttachment>(b =>
+            {
+                b.ToTable("message_attachments");
+                b.HasKey(x => x.Id);
+            });
+
+            modelBuilder.Entity<Company>(b =>
+            {
+                b.ToTable("company");
+                b.HasKey(x => x.Id);
+            });
+
+            modelBuilder.Entity<CompanyMember>(b =>
+            {
+                b.ToTable("company_member");
+                b.HasKey(x => x.Id);
+            });
+
+            modelBuilder.Entity<CompanyFollow>(b =>
+            {
+                b.ToTable("company_follow");
+                b.HasKey(x => x.Id);
+            });
+        }
+    }
+}

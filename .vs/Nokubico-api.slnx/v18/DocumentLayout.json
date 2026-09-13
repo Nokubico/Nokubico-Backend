@@ -1,0 +1,617 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\user\\Nokubico\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\entities\\companyfollow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\companyfollow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7449358-39C9-42BB-A9A0-EED925442B7F}|Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj|c:\\users\\user\\nokubico\\nokubico.infra.data\\context\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7449358-39C9-42BB-A9A0-EED925442B7F}|Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj|solutionrelative:nokubico.infra.data\\context\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7449358-39C9-42BB-A9A0-EED925442B7F}|Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj|c:\\users\\user\\nokubico\\nokubico.infra.data\\configurations\\walletconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7449358-39C9-42BB-A9A0-EED925442B7F}|Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj|solutionrelative:nokubico.infra.data\\configurations\\walletconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7449358-39C9-42BB-A9A0-EED925442B7F}|Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj|c:\\users\\user\\nokubico\\nokubico.infra.data\\configurations\\productconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7449358-39C9-42BB-A9A0-EED925442B7F}|Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj|solutionrelative:nokubico.infra.data\\configurations\\productconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\entities\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\entities\\productimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\productimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7449358-39C9-42BB-A9A0-EED925442B7F}|Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj|c:\\users\\user\\nokubico\\nokubico.infra.data\\configurations\\wallettxconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7449358-39C9-42BB-A9A0-EED925442B7F}|Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj|solutionrelative:nokubico.infra.data\\configurations\\wallettxconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7449358-39C9-42BB-A9A0-EED925442B7F}|Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj|c:\\users\\user\\nokubico\\nokubico.infra.data\\configurations\\postconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7449358-39C9-42BB-A9A0-EED925442B7F}|Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj|solutionrelative:nokubico.infra.data\\configurations\\postconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7449358-39C9-42BB-A9A0-EED925442B7F}|Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj|c:\\users\\user\\nokubico\\nokubico.infra.data\\configurations\\productimageconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7449358-39C9-42BB-A9A0-EED925442B7F}|Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj|solutionrelative:nokubico.infra.data\\configurations\\productimageconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7449358-39C9-42BB-A9A0-EED925442B7F}|Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj|c:\\users\\user\\nokubico\\nokubico.infra.data\\configurations\\userconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7449358-39C9-42BB-A9A0-EED925442B7F}|Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj|solutionrelative:nokubico.infra.data\\configurations\\userconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\entities\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7449358-39C9-42BB-A9A0-EED925442B7F}|Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj|c:\\users\\user\\nokubico\\nokubico.infra.data\\configurations\\simpleentityconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7449358-39C9-42BB-A9A0-EED925442B7F}|Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj|solutionrelative:nokubico.infra.data\\configurations\\simpleentityconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7449358-39C9-42BB-A9A0-EED925442B7F}|Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj|c:\\users\\user\\nokubico\\nokubico.infra.data\\configurations\\accountconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7449358-39C9-42BB-A9A0-EED925442B7F}|Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj|solutionrelative:nokubico.infra.data\\configurations\\accountconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\enums\\userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\enums\\userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\entities\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\enums\\productstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\enums\\productstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\enums\\walletstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\enums\\walletstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\entities\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\entities\\wallet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\wallet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\entities\\wallettx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\wallettx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\entities\\post.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\post.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\entities\\like.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\like.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\entities\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\entities\\share.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\share.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\entities\\bookmark.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\bookmark.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\entities\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\entities\\orderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\orderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\entities\\review.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\review.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\entities\\conversation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\conversation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\entities\\conversationparticipant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\conversationparticipant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\entities\\messageattachment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\messageattachment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\entities\\company.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\company.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico\\nokubico.domain\\entities\\companymember.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\companymember.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7449358-39C9-42BB-A9A0-EED925442B7F}|Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj|c:\\users\\user\\nokubico\\nokubico.infra.data\\nokubico.infra.data.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{D7449358-39C9-42BB-A9A0-EED925442B7F}|Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj|solutionrelative:nokubico.infra.data\\nokubico.infra.data.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7449358-39C9-42BB-A9A0-EED925442B7F}|Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj|c:\\users\\user\\nokubico\\nokubico.infra.data\\configurations\\sessionconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7449358-39C9-42BB-A9A0-EED925442B7F}|Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj|solutionrelative:nokubico.infra.data\\configurations\\sessionconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\User.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\User.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\User.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Entities\\User.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:24:58.496Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ProductImage.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\ProductImage.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\ProductImage.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\ProductImage.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Entities\\ProductImage.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:25:19.044Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Message.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Message.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Message.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Message.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Entities\\Message.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:26:10.787Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ProductConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Infra.Data\\Configurations\\ProductConfiguration.cs",
+              "RelativeDocumentMoniker": "Nokubico.Infra.Data\\Configurations\\ProductConfiguration.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Infra.Data\\Configurations\\ProductConfiguration.cs",
+              "RelativeToolTip": "Nokubico.Infra.Data\\Configurations\\ProductConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:30:53.536Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "WalletConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Infra.Data\\Configurations\\WalletConfiguration.cs",
+              "RelativeDocumentMoniker": "Nokubico.Infra.Data\\Configurations\\WalletConfiguration.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Infra.Data\\Configurations\\WalletConfiguration.cs",
+              "RelativeToolTip": "Nokubico.Infra.Data\\Configurations\\WalletConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:31:01.716Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Infra.Data\\Context\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Nokubico.Infra.Data\\Context\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Infra.Data\\Context\\AppDbContext.cs",
+              "RelativeToolTip": "Nokubico.Infra.Data\\Context\\AppDbContext.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:30:33.396Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CompanyFollow.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\CompanyFollow.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\CompanyFollow.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\CompanyFollow.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Entities\\CompanyFollow.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:26:25.508Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "WalletTxConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Infra.Data\\Configurations\\WalletTxConfiguration.cs",
+              "RelativeDocumentMoniker": "Nokubico.Infra.Data\\Configurations\\WalletTxConfiguration.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Infra.Data\\Configurations\\WalletTxConfiguration.cs",
+              "RelativeToolTip": "Nokubico.Infra.Data\\Configurations\\WalletTxConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:31:05.705Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PostConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Infra.Data\\Configurations\\PostConfiguration.cs",
+              "RelativeDocumentMoniker": "Nokubico.Infra.Data\\Configurations\\PostConfiguration.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Infra.Data\\Configurations\\PostConfiguration.cs",
+              "RelativeToolTip": "Nokubico.Infra.Data\\Configurations\\PostConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:31:09.45Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ProductImageConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Infra.Data\\Configurations\\ProductImageConfiguration.cs",
+              "RelativeDocumentMoniker": "Nokubico.Infra.Data\\Configurations\\ProductImageConfiguration.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Infra.Data\\Configurations\\ProductImageConfiguration.cs",
+              "RelativeToolTip": "Nokubico.Infra.Data\\Configurations\\ProductImageConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:30:57.358Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "UserConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Infra.Data\\Configurations\\UserConfiguration.cs",
+              "RelativeDocumentMoniker": "Nokubico.Infra.Data\\Configurations\\UserConfiguration.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Infra.Data\\Configurations\\UserConfiguration.cs",
+              "RelativeToolTip": "Nokubico.Infra.Data\\Configurations\\UserConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:30:40.873Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Account.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Account.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Account.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Account.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Entities\\Account.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:25:06.532Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "SimpleEntityConfigurations.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Infra.Data\\Configurations\\SimpleEntityConfigurations.cs",
+              "RelativeDocumentMoniker": "Nokubico.Infra.Data\\Configurations\\SimpleEntityConfigurations.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Infra.Data\\Configurations\\SimpleEntityConfigurations.cs",
+              "RelativeToolTip": "Nokubico.Infra.Data\\Configurations\\SimpleEntityConfigurations.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:31:20.931Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "AccountConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Infra.Data\\Configurations\\AccountConfiguration.cs",
+              "RelativeDocumentMoniker": "Nokubico.Infra.Data\\Configurations\\AccountConfiguration.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Infra.Data\\Configurations\\AccountConfiguration.cs",
+              "RelativeToolTip": "Nokubico.Infra.Data\\Configurations\\AccountConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:30:45.585Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "SessionConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Infra.Data\\Configurations\\SessionConfiguration.cs",
+              "RelativeDocumentMoniker": "Nokubico.Infra.Data\\Configurations\\SessionConfiguration.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Infra.Data\\Configurations\\SessionConfiguration.cs",
+              "RelativeToolTip": "Nokubico.Infra.Data\\Configurations\\SessionConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:30:49.537Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Comment.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Comment.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Comment.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Comment.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Entities\\Comment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:25:37.529Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Like.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Like.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Like.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Like.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Entities\\Like.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:25:34.175Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Share.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Share.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Share.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Share.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Entities\\Share.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:25:44.401Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Post.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Post.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Post.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Post.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Entities\\Post.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:25:31.015Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "WalletTx.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\WalletTx.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\WalletTx.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\WalletTx.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Entities\\WalletTx.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:25:27.69Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "MessageAttachment.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\MessageAttachment.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\MessageAttachment.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\MessageAttachment.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Entities\\MessageAttachment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:26:14.277Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "Nokubico.Infra.Data.csproj",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj",
+              "RelativeDocumentMoniker": "Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj",
+              "RelativeToolTip": "Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj",
+              "ViewState": "AgIAABIAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-09-13T00:26:45.453Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "CompanyMember.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\CompanyMember.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\CompanyMember.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\CompanyMember.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Entities\\CompanyMember.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:26:22.49Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Wallet.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Wallet.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Wallet.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Wallet.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Entities\\Wallet.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:25:24.357Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "Company.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Company.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Company.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Company.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Entities\\Company.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:26:18.177Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "ConversationParticipant.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\ConversationParticipant.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\ConversationParticipant.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\ConversationParticipant.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Entities\\ConversationParticipant.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:26:07.271Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Product.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Product.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Product.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Entities\\Product.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:25:15.894Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Conversation.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Conversation.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Conversation.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Conversation.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Entities\\Conversation.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:26:03.515Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Review.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Review.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Review.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Review.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Entities\\Review.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:25:59.27Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "OrderItem.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\OrderItem.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\OrderItem.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\OrderItem.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Entities\\OrderItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:25:55.822Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Order.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Order.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Order.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Order.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Entities\\Order.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:25:52.286Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Bookmark.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Bookmark.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Bookmark.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Bookmark.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Entities\\Bookmark.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:25:48.633Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Session.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Session.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Session.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\Session.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Entities\\Session.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:25:10.635Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "WalletStatus.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Enums\\WalletStatus.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Enums\\WalletStatus.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Enums\\WalletStatus.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Enums\\WalletStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:24:50.929Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "UserRole.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Enums\\UserRole.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Enums\\UserRole.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Enums\\UserRole.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Enums\\UserRole.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:24:41.723Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "BaseEntity.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\BaseEntity.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\BaseEntity.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Entities\\BaseEntity.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Entities\\BaseEntity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:24:37.875Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ProductStatus.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Enums\\ProductStatus.cs",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Enums\\ProductStatus.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico\\Nokubico.Domain\\Enums\\ProductStatus.cs",
+              "RelativeToolTip": "Nokubico.Domain\\Enums\\ProductStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T00:24:47.825Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
