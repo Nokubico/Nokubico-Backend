@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Nokubico.Infra.Data")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fd671ae0f55d193e27de72cd7bfb06e9d5b4977c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a87efe3adbb91f58a28147bff66adf6645665aab")]
 [assembly: System.Reflection.AssemblyProductAttribute("Nokubico.Infra.Data")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Nokubico.Infra.Data")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
