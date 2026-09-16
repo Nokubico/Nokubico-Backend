@@ -56,7 +56,7 @@ Baseado na **Ficha Técnica NoKubico** (`Ficha técnica NoKubico.pdf`):
 | Campo | Descrição |
 |-------|-----------|
 | **Startup** | KUZOLA STUDIO |
-| **Representante** | Leocaldio Carlos |
+| **Representante** | ------- |
 | **Estado** | Em desenvolvimento (MVP em definição) |
 | **Objetivo** | Desenvolver uma plataforma digital que funcione como um ecossistema seguro e inteligente para compra, venda e negociação de conteúdo multimédia produzidos por criadores angolanos, promovendo a economia criativa através de tecnologia, transparência e confiança |
 | **Problema a resolver** | Criadores multimédia angolanos enfrentam dificuldades em monetizar os seus serviços de forma segura, profissional e escalável, devido à ausência de plataformas com boa visibilidade e à inexistência de mecanismos inteligentes de precificação e negociação |
