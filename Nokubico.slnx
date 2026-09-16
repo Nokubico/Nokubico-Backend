@@ -4,4 +4,5 @@
   <Project Path="Nokubico.Domain/Nokubico.Domain.csproj" Id="eaff85b7-fb32-4893-be76-7fe8c7591d59" />
   <Project Path="Nokubico.Infra.Data/Nokubico.Infra.Data.csproj" Id="d7449358-39c9-42bb-a9a0-eed925442b7f" />
   <Project Path="Nokubico.Infra.Ioc/Nokubico.Infra.Ioc.csproj" Id="dcd47770-cd7c-46b4-8da6-fbc143d7094d" />
+  <Project Path="Nokubico.Infra.Services/Nokubico.Infra.Services.csproj" Id="9a3f8c41-5b7e-4a2d-9c01-6d8e2f4b0a3c" />
 </Solution>
