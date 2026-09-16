@@ -56,7 +56,7 @@ Baseado na **Ficha Técnica NoKubico** (`Ficha técnica NoKubico.pdf`):
 | Campo | Descrição |
 |-------|-----------|
 | **Startup** | KUZOLA STUDIO |
-| **Representante** | ---- |
+| **Representante** | ----- |
 | **Estado** | Em desenvolvimento (MVP em definição) |
 | **Objetivo** | Desenvolver uma plataforma digital que funcione como um ecossistema seguro e inteligente para compra, venda e negociação de conteúdo multimédia produzidos por criadores angolanos, promovendo a economia criativa através de tecnologia, transparência e confiança |
 | **Problema a resolver** | Criadores multimédia angolanos enfrentam dificuldades em monetizar os seus serviços de forma segura, profissional e escalável, devido à ausência de plataformas com boa visibilidade e à inexistência de mecanismos inteligentes de precificação e negociação |
@@ -103,11 +103,12 @@ O projeto segue **Domain-Driven Design** com separação em camadas (Clean Archi
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  Nokubico.API          → Apresentação (Controllers, Swagger)│
-│  Nokubico.Application  → Casos de uso (DTOs, Serviços)      │
-│  Nokubico.Domain       → Entidades, Enums (regras de negócio)│
-│  Nokubico.Infra.Data   → EF Core, DbContext, Configurations  │
-│  Nokubico.Infra.Ioc    → Composição Root (Registo de DI)     │
+│  Nokubico.API            → Apresentação (Controllers, Swagger)│
+│  Nokubico.Application    → Casos de uso (DTOs, Serviços)     │
+│  Nokubico.Domain         → Entidades, Enums (regras de negócio)│
+│  Nokubico.Infra.Data     → EF Core, DbContext, Configurations │
+│  Nokubico.Infra.Services → Serviços externos (IA, Storage, Pagamentos) │
+│  Nokubico.Infra.Ioc      → Composição Root (Registo de DI)    │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -118,15 +119,26 @@ Camada de **apresentação**. Responsável apenas por receber pedidos HTTP, dele
 | Pasta / Ficheiro | Função |
 |------------------|--------|
 | `Controllers/` | Endpoints REST (atualmente com o template `WeatherForecastController`, a substituir) |
+| `Middleware/` | Middlewares personalizados (ex.: tratamento global de exceções) |
+| `Errors/` | Classes de erro padronizadas para respostas da API |
+| `Extensions/` | Métodos de extensão (ex.: extensões de `ClaimsPrincipal`) |
+| `Models/` | View Models de pedido/resposta (ex.: paginação, login) |
 | `Program.cs` | Bootstrap da aplicação: DI, Swagger, pipeline HTTP |
 | `appsettings.json` / `appsettings.Development.json` | Configuração (logging, connection string) |
 | `Nokubico.API.http` | Exemplos de pedidos HTTP |
+
+> **Nota de arquitetura:** integrações externas (IA, armazenamento, pagamentos) **não** ficam nesta camada — residem em `Nokubico.Infra.Services`.
 
 ### 4.2 Nokubico.Application
 
 Camada de **aplicação / casos de uso**. Orquestra operações de negócio usando entidades do domínio e expõe DTOs. **Não contém regras de negócio nem acesso direto à base de dados.**
 
-> Estrutura prevista (a preencher): `DTOs/`, `Interfaces/`, `Services/`, `Mapping/`.
+| Pasta | Função |
+|-------|--------|
+| `DTOs/` | Data Transfer Objects (isolam o domínio da API) |
+| `Interfaces/` | Contratos de serviços de aplicação (ex.: futuro `IIAService` — porta do agente de IA) |
+| `Mapping/` | Perfis de mapeamento (AutoMapper) |
+| `Services/` | Implementação dos casos de uso |
 
 ### 4.3 Nokubico.Domain
 
@@ -136,6 +148,11 @@ Camada de **domínio**, o coração do negócio. Contém apenas entidades, enums
 |-------|--------|
 | `Entities/` | Entidades do negócio (ver secção [7. Base de Dados](#7-base-de-dados)) |
 | `Enums/` | `UserRole`, `ProductStatus`, `WalletStatus` |
+| `Account/` | Modelos de autenticação do domínio |
+| `Interface/` | Contratos de repositórios (portas de persistência) |
+| `Pagination/` | Objetos de paginação (`PagedList`) |
+| `SystemModels/` | Modelos de sistema/apoio |
+| `Validation/` | Validação de domínio (ex.: `DomainExceptionValidation`) |
 
 As entidades seguem o padrão **encapsulado** (props com `private set`) e expõem **métodos de comportamento** (`SetName`, `VerifyEmail`, `AddLike`, `Touch()`, …) em vez de setters públicos, garantindo que as regras sejam aplicadas no próprio domínio. Todas herdam de `BaseEntity` (fornece `Id`, `CreatedAt`, `UpdatedAt` e `Touch()`).
 
@@ -147,13 +164,26 @@ Camada de **infraestrutura de dados**. Implementa o mapeamento objeto-relacional
 |------------------|--------|
 | `Context/AppDbContext.cs` | O `DbContext` principal; expõe os `DbSet` de todas as entidades |
 | `Configurations/` | Mapeamento Fluent API por entidade (tabela, chaves, índices, FKs, defaults) |
+| `Helper/` | Classes auxiliares |
+| `Identity/` | Implementação da autenticação (Identity/JWT) |
+| `Repository/` | Implementação concreta dos repositórios do domínio |
 | `Migrations/` | Migrações geradas pelo EF Core (ainda **vazia** — a primeira migração está por criar) |
 
 ### 4.5 Nokubico.Infra.Ioc
 
 Camada de **Composição Root** (Inversão de Controlo). Regista as dependências da infraestrutura na DI (ex.: `AddDbContext<AppDbContext>`). É referenciada apenas pela API.
 
-### 4.6 HealthIA.Domain (resíduo)
+### 4.6 Nokubico.Infra.Services
+
+Camada de **infraestrutura de serviços externos**. Implementa as integrações com terceiros — isoladas da API e do banco de dados.
+
+| Pasta | Função |
+|-------|--------|
+| `AI/` | Agente de IA (LLM): sugestão de preços/descontos e apoio à negociação (implementa o contrato `IIAService` da Application) |
+| `Storage/` | Armazenamento de ficheiros (AWS S3 / MinIO) |
+| `Payments/` | Gateways de pagamento (Stripe / Flutterwave) |
+
+### 4.7 HealthIA.Domain (resíduo)
 
 A pasta `HealthIA.Domain/` é um **resíduo do projeto de referência HeathIA** (`Paciente`, `DomainExceptionValidation`) e **não faz parte da solução** `Nokubico.slnx`. Deve ser **removida** antes de criar migrações ou fazer commit.
 
@@ -681,13 +711,15 @@ Enums planeados no schema: `MessageType`, `WalletStatus`, `TxType`, `DepositMeth
 
 ### Estado atual
 
-- [x] Solução DDD em 5 projetos (.NET 10, EF Core 10, PostgreSQL)
+- [x] Solução DDD em 6 projetos (.NET 10, EF Core 10, PostgreSQL)
 - [x] 22 entidades mapeadas (ver secção 7) com configurações Fluent API
 - [x] Autenticação modelada (User, Account, Session) — sessões e OAuth prontos para implementação
 - [x] Swagger configurado
+- [x] `Nokubico.Infra.Services` criado para integrações externas (IA, Storage, Payments)
 - [x] Build da solução a passar
 - [ ] Migração inicial (por criar — ver [Como Executar](#6-como-executar))
-- [ ] Controllers e serviços de aplicação (em branco)
+- [ ] Controllers e serviços de aplicação (pastas criadas, ainda vazias)
+- [ ] Contrato `IIAService` em `Application/Interfaces` e implementação `IAService` em `Infra.Services/AI`
 - [ ] Relacionamentos/constraints de FK completos nas configurações
 
 ### Roadmap
@@ -696,7 +728,7 @@ Enums planeados no schema: `MessageType`, `WalletStatus`, `TxType`, `DepositMeth
 - **APIs de pagamentos externos** (Stripe / Flutterwave) e depósitos/levantamentos com KYC.
 - **Autenticação Google (OAuth)** via `account` com provider `google`.
 - **Docker** (PostgreSQL + API em `docker-compose`) para ambiente de desenvolvimento padronizado.
-- **Integração com IA** (LLM) para sugestão de preços/descontos com guardrails.
+- **Integração com IA** (LLM) para sugestão de preços/descontos com guardrails — `IIAService` em `Application/Interfaces`, `IAService` em `Infra.Services/AI`.
 - **Notificações em tempo real** (SignalR) e busca (Algolia/Elasticsearch).
 - **Armazenamento de ficheiros** (AWS S3/MinIO) e URLs no banco.
 - **Refactor do código legado** (`WeatherForecast*`) e remoção do resíduo `HealthIA.Domain`.
