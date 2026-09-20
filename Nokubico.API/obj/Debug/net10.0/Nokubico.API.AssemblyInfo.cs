@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Nokubico.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+209ae4fa03074664d5e56542b3206928ebd60a7f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7b54523ebbdba101f87ee7ee8fd1b47791d6db5e")]
 [assembly: System.Reflection.AssemblyProductAttribute("Nokubico.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Nokubico.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
