@@ -3,19 +3,35 @@
   "WorkspaceRootPath": "C:\\Users\\user\\Nokubico-Backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{635EA031-3995-4E6F-AA21-7E22698F8D9D}|Nokubico.API\\Nokubico.API.csproj|c:\\users\\user\\nokubico-backend\\nokubico.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{635EA031-3995-4E6F-AA21-7E22698F8D9D}|Nokubico.API\\Nokubico.API.csproj|solutionrelative:nokubico.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico-backend\\nokubico.domain\\entities\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\user\\.copilot\\plans\\plan-mapear-todas-as-entidades-e-encapsular-propriedades.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|MarkdownSecurePreview"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{635EA031-3995-4E6F-AA21-7E22698F8D9D}|Nokubico.API\\Nokubico.API.csproj|c:\\users\\user\\nokubico-backend\\nokubico.api\\nokubico.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{635EA031-3995-4E6F-AA21-7E22698F8D9D}|Nokubico.API\\Nokubico.API.csproj|solutionrelative:nokubico.api\\nokubico.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico-backend\\nokubico.domain\\nokubico.domain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\nokubico.domain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7449358-39C9-42BB-A9A0-EED925442B7F}|Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj|c:\\users\\user\\nokubico-backend\\nokubico.infra.data\\nokubico.infra.data.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{D7449358-39C9-42BB-A9A0-EED925442B7F}|Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj|solutionrelative:nokubico.infra.data\\nokubico.infra.data.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2DE00031-C3EF-4277-ABC2-5F5AABE33A3B}|Nokubico.Application\\Nokubico.Application.csproj|c:\\users\\user\\nokubico-backend\\nokubico.application\\nokubico.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{2DE00031-C3EF-4277-ABC2-5F5AABE33A3B}|Nokubico.Application\\Nokubico.Application.csproj|solutionrelative:nokubico.application\\nokubico.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DCD47770-CD7C-46B4-8DA6-FBC143D7094D}|Nokubico.Infra.Ioc\\Nokubico.Infra.Ioc.csproj|c:\\users\\user\\nokubico-backend\\nokubico.infra.ioc\\servicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DCD47770-CD7C-46B4-8DA6-FBC143D7094D}|Nokubico.Infra.Ioc\\Nokubico.Infra.Ioc.csproj|solutionrelative:nokubico.infra.ioc\\servicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico-backend\\nokubico.domain\\entities\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{635EA031-3995-4E6F-AA21-7E22698F8D9D}|Nokubico.API\\Nokubico.API.csproj|c:\\users\\user\\nokubico-backend\\nokubico.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{635EA031-3995-4E6F-AA21-7E22698F8D9D}|Nokubico.API\\Nokubico.API.csproj|solutionrelative:nokubico.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico-backend\\nokubico.domain\\entities\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -78,10 +94,6 @@
       "RelativeMoniker": "D:0:0:{D7449358-39C9-42BB-A9A0-EED925442B7F}|Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj|solutionrelative:nokubico.infra.data\\context\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\user\\Nokubico-Backend\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|c:\\users\\user\\nokubico-backend\\nokubico.domain\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EAFF85B7-FB32-4893-BE76-7FE8C7591D59}|Nokubico.Domain\\Nokubico.Domain.csproj|solutionrelative:nokubico.domain\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -126,8 +138,8 @@
       "RelativeMoniker": "D:0:0:{DCD47770-CD7C-46B4-8DA6-FBC143D7094D}|Nokubico.Infra.Ioc\\Nokubico.Infra.Ioc.csproj|solutionrelative:nokubico.infra.ioc\\nokubico.infra.ioc.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{635EA031-3995-4E6F-AA21-7E22698F8D9D}|Nokubico.API\\Nokubico.API.csproj|c:\\users\\user\\nokubico-backend\\nokubico.api\\nokubico.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{635EA031-3995-4E6F-AA21-7E22698F8D9D}|Nokubico.API\\Nokubico.API.csproj|solutionrelative:nokubico.api\\nokubico.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\user\\Nokubico-Backend\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -137,7 +149,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -145,7 +157,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
+              "Title": "Nokubico.Domain.csproj",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Nokubico.Domain.csproj",
+              "RelativeDocumentMoniker": "Nokubico.Domain\\Nokubico.Domain.csproj",
+              "ToolTip": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Nokubico.Domain.csproj",
+              "RelativeToolTip": "Nokubico.Domain\\Nokubico.Domain.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-09-20T19:29:09.759Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Entities\\User.cs",
               "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\User.cs",
@@ -157,7 +182,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "BaseEntity.cs",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Entities\\BaseEntity.cs",
               "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\BaseEntity.cs",
@@ -169,15 +194,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Session.cs",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Entities\\Session.cs",
               "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Session.cs",
               "ToolTip": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Entities\\Session.cs",
               "RelativeToolTip": "Nokubico.Domain\\Entities\\Session.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAmwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-13T11:18:21.956Z"
+              "WhenOpened": "2026-09-13T11:18:21.956Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -193,56 +219,83 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.API\\Program.cs",
-              "RelativeDocumentMoniker": "Nokubico.API\\Program.cs",
-              "ToolTip": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.API\\Program.cs",
-              "RelativeToolTip": "Nokubico.API\\Program.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-13T11:27:55.743Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ServiceCollectionExtensions.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Infra.Ioc\\ServiceCollectionExtensions.cs",
-              "RelativeDocumentMoniker": "Nokubico.Infra.Ioc\\ServiceCollectionExtensions.cs",
-              "ToolTip": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Infra.Ioc\\ServiceCollectionExtensions.cs",
-              "RelativeToolTip": "Nokubico.Infra.Ioc\\ServiceCollectionExtensions.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAAwBcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-13T11:34:34.566Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
               "Title": "Nokubico.API.csproj",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.API\\Nokubico.API.csproj",
               "RelativeDocumentMoniker": "Nokubico.API\\Nokubico.API.csproj",
               "ToolTip": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.API\\Nokubico.API.csproj",
               "RelativeToolTip": "Nokubico.API\\Nokubico.API.csproj",
-              "ViewState": "AgIAAA0AAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-09-13T11:51:17.276Z"
+              "WhenOpened": "2026-09-13T11:51:17.276Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 4,
+              "Title": "Nokubico.Infra.Data.csproj",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj",
+              "RelativeDocumentMoniker": "Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj",
+              "ToolTip": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj",
+              "RelativeToolTip": "Nokubico.Infra.Data\\Nokubico.Infra.Data.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-09-20T19:29:13.226Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Nokubico.Application.csproj",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Application\\Nokubico.Application.csproj",
+              "RelativeDocumentMoniker": "Nokubico.Application\\Nokubico.Application.csproj",
+              "ToolTip": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Application\\Nokubico.Application.csproj",
+              "RelativeToolTip": "Nokubico.Application\\Nokubico.Application.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-09-20T19:29:05.645Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.API\\Program.cs",
+              "RelativeDocumentMoniker": "Nokubico.API\\Program.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.API\\Program.cs",
+              "RelativeToolTip": "Nokubico.API\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T11:27:55.743Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ServiceCollectionExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Infra.Ioc\\ServiceCollectionExtensions.cs",
+              "RelativeDocumentMoniker": "Nokubico.Infra.Ioc\\ServiceCollectionExtensions.cs",
+              "ToolTip": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Infra.Ioc\\ServiceCollectionExtensions.cs",
+              "RelativeToolTip": "Nokubico.Infra.Ioc\\ServiceCollectionExtensions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-13T11:34:34.566Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
               "Title": "Nokubico.Infra.Ioc.csproj",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Infra.Ioc\\Nokubico.Infra.Ioc.csproj",
               "RelativeDocumentMoniker": "Nokubico.Infra.Ioc\\Nokubico.Infra.Ioc.csproj",
               "ToolTip": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Infra.Ioc\\Nokubico.Infra.Ioc.csproj",
               "RelativeToolTip": "Nokubico.Infra.Ioc\\Nokubico.Infra.Ioc.csproj",
-              "ViewState": "AgIAAA8AAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAIBZwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-09-13T11:51:12.992Z"
+              "WhenOpened": "2026-09-13T11:51:12.992Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "Account.cs",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Entities\\Account.cs",
               "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Account.cs",
@@ -254,7 +307,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "CompanyMember.cs",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Entities\\CompanyMember.cs",
               "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\CompanyMember.cs",
@@ -266,7 +319,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 32,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.API\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Nokubico.API\\Properties\\launchSettings.json",
@@ -278,7 +331,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "OrderItem.cs",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Entities\\OrderItem.cs",
               "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\OrderItem.cs",
@@ -290,7 +343,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.API\\appsettings.Development.json",
               "RelativeDocumentMoniker": "Nokubico.API\\appsettings.Development.json",
@@ -302,7 +355,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 15,
               "Title": "Post.cs",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Entities\\Post.cs",
               "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Post.cs",
@@ -314,7 +367,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 16,
               "Title": "MessageAttachment.cs",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Entities\\MessageAttachment.cs",
               "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\MessageAttachment.cs",
@@ -326,7 +379,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "Comment.cs",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Entities\\Comment.cs",
               "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Comment.cs",
@@ -338,7 +391,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 29,
               "Title": "Message.cs",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Entities\\Message.cs",
               "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Message.cs",
@@ -350,7 +403,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 30,
               "Title": "Review.cs",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Entities\\Review.cs",
               "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Review.cs",
@@ -362,7 +415,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
               "Title": "ProductImage.cs",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Entities\\ProductImage.cs",
               "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\ProductImage.cs",
@@ -374,7 +427,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 18,
               "Title": "CompanyFollow.cs",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Entities\\CompanyFollow.cs",
               "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\CompanyFollow.cs",
@@ -386,7 +439,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 31,
               "Title": "WalletTx.cs",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Entities\\WalletTx.cs",
               "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\WalletTx.cs",
@@ -398,7 +451,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 24,
               "Title": "Like.cs",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Entities\\Like.cs",
               "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Like.cs",
@@ -410,7 +463,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 25,
               "Title": "Bookmark.cs",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Entities\\Bookmark.cs",
               "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Bookmark.cs",
@@ -422,7 +475,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 26,
               "Title": "Share.cs",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Entities\\Share.cs",
               "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Share.cs",
@@ -434,7 +487,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 27,
               "Title": "Conversation.cs",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Entities\\Conversation.cs",
               "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Conversation.cs",
@@ -446,7 +499,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 28,
               "Title": "ConversationParticipant.cs",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Entities\\ConversationParticipant.cs",
               "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\ConversationParticipant.cs",
@@ -458,7 +511,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 19,
               "Title": "Order.cs",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Entities\\Order.cs",
               "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Order.cs",
@@ -470,7 +523,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 34,
               "Title": ".gitignore",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\.gitignore",
               "RelativeDocumentMoniker": ".gitignore",
@@ -482,7 +535,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 20,
               "Title": "Company.cs",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Entities\\Company.cs",
               "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Company.cs",
@@ -494,7 +547,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 23,
               "Title": "Product.cs",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Entities\\Product.cs",
               "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Product.cs",
@@ -506,7 +559,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 21,
               "Title": "Wallet.cs",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Domain\\Entities\\Wallet.cs",
               "RelativeDocumentMoniker": "Nokubico.Domain\\Entities\\Wallet.cs",
@@ -518,7 +571,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 22,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\user\\Nokubico-Backend\\Nokubico.Infra.Data\\Context\\AppDbContext.cs",
               "RelativeDocumentMoniker": "Nokubico.Infra.Data\\Context\\AppDbContext.cs",
