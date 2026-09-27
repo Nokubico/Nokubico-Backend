@@ -1,0 +1,53 @@
+[33mcommit 209ae4fa03074664d5e56542b3206928ebd60a7f[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mdevelop[m[33m, [m[1;31morigin/develop[m[33m)[m
+Merge: c0ef876 25bba41
+Author: Leocaldio Carlos <leocaldiocarloss@gmail.com>
+Date:   Wed Sep 16 02:20:00 2026 +0100
+
+    Merge: trazendo as novidades da branch main para a develop
+
+[33mcommit 25bba41e1e7454a8143ee74f5479595a67a3d609[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/hotfix[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m, [m[1;32mhotfix[m[33m)[m
+Author: Leocaldio Carlos <leocaldiocarloss@gmail.com>
+Date:   Wed Sep 16 01:56:26 2026 +0100
+
+    New Infra
+
+[33mcommit c0ef87638741e015b32b4de34d84a16c85f50f44[m
+Author: Nokubico <admin@nokubico.ao>
+Date:   Wed Sep 16 01:29:37 2026 +0100
+
+    Update representative name in README.md
+
+[33mcommit a20a8096e8e0db8b65b363e6d4ac3c17ef3c6ce9[m
+Author: Leocaldio Carlos <leocaldiocarloss@gmail.com>
+Date:   Wed Sep 16 01:25:45 2026 +0100
+
+    new readme
+
+[33mcommit a87efe3adbb91f58a28147bff66adf6645665aab[m
+Author: Leocaldio Carlos <leocaldiocarloss@gmail.com>
+Date:   Sun Sep 13 13:49:03 2026 +0100
+
+    Encapsula entidades, atualiza EF Core 10 e adiciona Swagger
+    
+    - Encapsulamento das propriedades das entidades do domínio, tornando-as imutáveis externamente e adicionando métodos controlados para alteração de estado (DDD).
+    - Atualização do Entity Framework Core e Npgsql para a versão 10 em todos os projetos, incluindo atualização dos arquivos de lock do NuGet.
+    - Adição do Swashbuckle.AspNetCore e configuração do Swagger na API para documentação automática.
+    - Exposição explícita dos DbSets no AppDbContext.
+    - Inclusão da string de conexão PostgreSQL em appsettings.Development.json.
+    - Ajustes no launchSettings.json para abrir navegador e corrigir nome do projeto.
+    - Atualização de arquivos de configuração, cache e assets.
+    - Remoção de arquivos binários antigos (.vsidx).
+    - Adição de .gitignore para ignorar arquivos/pastas de ambiente.
+    - Criação de ServiceCollectionExtensions.cs com extensão AddInfrastructure para registrar AppDbContext via Npgsql e IConfiguration.
+
+[33mcommit fd671ae0f55d193e27de72cd7bfb06e9d5b4977c[m
+Author: Leocaldio Carlos <leocaldiocarloss@gmail.com>
+Date:   Sun Sep 13 11:53:48 2026 +0100
+
+    DDD
+
+[33mcommit b6ac928a8913ff2856e554882a58c50045ac1b3f[m
+Author: Leocaldio Carlos <leocaldiocarloss@gmail.com>
+Date:   Sun Sep 13 11:52:39 2026 +0100
+
+    first commit
