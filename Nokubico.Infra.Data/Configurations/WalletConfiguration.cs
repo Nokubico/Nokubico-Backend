@@ -10,6 +10,7 @@ namespace Nokubico.Infra.Data.Configurations
         {
             builder.ToTable("wallets");
             builder.HasKey(x => x.Id);
+            builder.HasOne(x => x.User).WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
             builder.Property(x => x.Balance).IsRequired();
             builder.Property(x => x.Currency).HasMaxLength(3).IsRequired();
             builder.Property(x => x.CreatedAt).HasDefaultValueSql("now()");

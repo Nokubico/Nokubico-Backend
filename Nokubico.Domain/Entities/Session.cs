@@ -10,6 +10,17 @@ namespace Nokubico.Domain.Entities
 
         public User? User { get; private set; }
 
+        protected Session()
+        {
+        }
+
+        public Session(string token, DateTime expiresAt, User user)
+        {
+            Token = token;
+            SetExpiresAt(expiresAt);
+            SetUser(user);
+        }
+
         public void SetExpiresAt(DateTime expires)
         {
             ExpiresAt = expires;

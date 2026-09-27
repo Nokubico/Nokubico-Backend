@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Nokubico.Domain.Entities
 {
-    public class Company
+    public class Company : IEntity
     {
         public Guid Id { get; private set; }
         public string? Name { get; private set; }
@@ -11,6 +11,21 @@ namespace Nokubico.Domain.Entities
         public string? Website { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
+
+        public Company()
+        {
+            Id = Guid.NewGuid();
+            CreatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
+        }
+
+        public Company(string name)
+        {
+            Id = Guid.NewGuid();
+            CreatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
+            Name = name;
+        }
 
         public ICollection<CompanyMember> Members { get; private set; } = new List<CompanyMember>();
         public ICollection<CompanyFollow> Follows { get; private set; } = new List<CompanyFollow>();

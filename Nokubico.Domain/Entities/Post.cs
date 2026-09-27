@@ -11,6 +11,35 @@ namespace Nokubico.Domain.Entities
         public Guid AuthorId { get; private set; }
         public Guid? SharedPostId { get; private set; }
 
+        public User? Author { get; private set; }
+        public Post? SharedPost { get; private set; }
+
+        protected Post()
+        {
+        }
+
+        public Post(Guid authorId, string? content, string? image, string? video)
+        {
+            AuthorId = authorId;
+            Content = content;
+            Image = image;
+            Video = video;
+        }
+
+        public void SetAuthor(User author)
+        {
+            Author = author;
+            AuthorId = author.Id;
+            Touch();
+        }
+
+        public void SetSharedPost(Post post)
+        {
+            SharedPost = post;
+            SharedPostId = post.Id;
+            Touch();
+        }
+
         public ICollection<Like> Likes { get; private set; } = new List<Like>();
         public ICollection<Comment> Comments { get; private set; } = new List<Comment>();
 

@@ -1,14 +1,25 @@
-using System;
+﻿using System;
 
 namespace Nokubico.Domain.Entities
 {
-    public class ProductImage
+    public class ProductImage : IEntity
     {
         public Guid ProductId { get; private set; }
         public string ImageUrl { get; private set; } = null!;
         public short Position { get; private set; }
 
         public Product? Product { get; private set; }
+
+        public ProductImage()
+        {
+        }
+
+        public ProductImage(Product product, string imageUrl, short position)
+        {
+            SetProduct(product);
+            ImageUrl = imageUrl;
+            Position = position;
+        }
 
         public void SetImageUrl(string url)
         {

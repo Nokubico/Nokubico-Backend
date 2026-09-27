@@ -10,6 +10,7 @@ namespace Nokubico.Infra.Data.Configurations
         {
             builder.ToTable("product");
             builder.HasKey(x => x.Id);
+            builder.HasOne(x => x.Creator).WithMany().HasForeignKey(x => x.CreatorId).OnDelete(DeleteBehavior.Cascade);
             builder.Property(x => x.Price).IsRequired();
             builder.Property(x => x.Currency).HasMaxLength(3).IsRequired();
             builder.Property(x => x.CreatedAt).HasDefaultValueSql("now()");

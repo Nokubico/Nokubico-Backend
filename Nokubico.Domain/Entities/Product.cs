@@ -18,6 +18,30 @@ namespace Nokubico.Domain.Entities
         public Guid CreatorId { get; private set; }
         public ProductStatus Status { get; private set; }
 
+        public User? Creator { get; private set; }
+
+        protected Product()
+        {
+        }
+
+        public Product(string title, string slug, string category, long price, string currency, Guid creatorId)
+        {
+            Title = title;
+            Slug = slug;
+            Category = category;
+            Price = price;
+            Currency = currency;
+            CreatorId = creatorId;
+            Status = ProductStatus.Draft;
+        }
+
+        public void SetCreator(User creator)
+        {
+            Creator = creator;
+            CreatorId = creator.Id;
+            Touch();
+        }
+
         public ICollection<ProductImage> Images { get; private set; } = new List<ProductImage>();
         public ICollection<OrderItem> OrderItems { get; private set; } = new List<OrderItem>();
         public ICollection<Review> Reviews { get; private set; } = new List<Review>();

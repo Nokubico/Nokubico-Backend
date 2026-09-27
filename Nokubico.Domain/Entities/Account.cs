@@ -13,6 +13,17 @@ namespace Nokubico.Domain.Entities
 
         public User? User { get; private set; }
 
+        protected Account()
+        {
+        }
+
+        public Account(string accountId, string providerId, User user)
+        {
+            AccountId = accountId;
+            ProviderId = providerId;
+            SetUser(user);
+        }
+
         public void SetTokens(string? accessToken, string? refreshToken)
         {
             AccessToken = accessToken;

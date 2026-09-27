@@ -15,6 +15,18 @@ namespace Nokubico.Domain.Entities
         public UserRole Role { get; private set; }
         public bool EmailVerified { get; private set; }
 
+        protected User()
+        {
+        }
+
+        public User(string email, string name, UserRole role)
+        {
+            Email = email;
+            Name = name;
+            Role = role;
+            EmailVerified = false;
+        }
+
         public ICollection<Account> Accounts { get; private set; } = new List<Account>();
         public ICollection<Session> Sessions { get; private set; } = new List<Session>();
         public ICollection<Post> Posts { get; private set; } = new List<Post>();

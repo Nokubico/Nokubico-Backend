@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 
 namespace Nokubico.Domain.Entities
 {
-    public class WalletTx
+    public class WalletTx : IEntity
     {
         public Guid Id { get; private set; }
         public Guid WalletId { get; private set; }
@@ -12,6 +12,22 @@ namespace Nokubico.Domain.Entities
         public DateTime CreatedAt { get; private set; }
 
         public Wallet? Wallet { get; private set; }
+
+        public WalletTx()
+        {
+            Id = Guid.NewGuid();
+            CreatedAt = DateTime.UtcNow;
+        }
+
+        public WalletTx(Wallet wallet, string type, long amount)
+        {
+            Id = Guid.NewGuid();
+            CreatedAt = DateTime.UtcNow;
+            Type = type;
+            Amount = amount;
+            BalanceBefore = wallet.Balance;
+            SetWallet(wallet);
+        }
 
         public void SetWallet(Wallet wallet)
         {
