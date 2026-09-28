@@ -6,14 +6,14 @@ namespace Nokubico.Domain.Interface.Auth
 {
     public interface IUserRepository
     {
-        User? FindByEmail(string email);
+        Task<User?> FindByEmail(string email, CancellationToken cancellationToken = default);
 
-        User? FindById(Guid id);
+        Task<User?> FindById(Guid id, CancellationToken cancellationToken = default);
 
-        User Save(User user);
+        Task<User> Save(User user, CancellationToken cancellationToken = default);
 
-        void Delete(User user);
+        Task Delete(User user, CancellationToken cancellationToken = default);
 
-        PagedList<User> FindAll(PaginationParams pagination);
+        Task<PagedList<User>> FindAll(PaginationParams pagination, CancellationToken cancellationToken = default);
     }
 }

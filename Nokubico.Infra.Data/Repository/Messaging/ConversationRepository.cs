@@ -13,64 +13,64 @@ namespace Nokubico.Infra.Data.Repository.Messaging
         {
         }
 
-        public Conversation? FindById(Guid id)
+        public async Task<Conversation?> FindById(Guid id, CancellationToken cancellationToken = default)
         {
-            return Context.Conversations
+            return await Context.Conversations
                 .Include(c => c.Participants)
-                .FirstOrDefault(c => c.Id == id);
+                .FirstOrDefaultAsync(c => c.Id == id, cancellationToken);
         }
 
-        public PagedList<Conversation> FindByUser(Guid userId, PaginationParams pagination)
+        public async Task<PagedList<Conversation>> FindByUser(Guid userId, PaginationParams pagination, CancellationToken cancellationToken = default)
         {
             var query = Context.Conversations
                 .Where(c => c.Participants.Any(p => p.UserId == userId));
-            var total = query.Count();
-            var items = query
+            var total = await query.CountAsync(cancellationToken);
+            var items = await query
                 .Include(c => c.Participants)
                 .OrderByDescending(c => c.UpdatedAt)
                 .Skip(pagination.Offset)
                 .Take(pagination.PageSize)
-                .ToList();
+                .ToListAsync(cancellationToken);
 
             return ToPagedList(items, total, pagination);
         }
 
-        public Conversation Save(Conversation conversation)
+        public async Task<Conversation> Save(Conversation conversation, CancellationToken cancellationToken = default)
         {
             if (!Context.Conversations.Contains(conversation)) Context.Conversations.Add(conversation);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync(cancellationToken);
             return conversation;
         }
 
-        public Message SaveMessage(Message message)
+        public async Task<Message> SaveMessage(Message message, CancellationToken cancellationToken = default)
         {
             if (!Context.Messages.Contains(message)) Context.Messages.Add(message);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync(cancellationToken);
             return message;
         }
 
-        public MessageAttachment SaveAttachment(MessageAttachment attachment)
+        public async Task<MessageAttachment> SaveAttachment(MessageAttachment attachment, CancellationToken cancellationToken = default)
         {
             if (!Context.MessageAttachments.Contains(attachment)) Context.MessageAttachments.Add(attachment);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync(cancellationToken);
             return attachment;
         }
 
-        public bool IsParticipant(Guid conversationId, Guid userId)
+        public async Task<bool> IsParticipant(Guid conversationId, Guid userId, CancellationToken cancellationToken = default)
         {
-            return Context.ConversationParticipants.Any(p => p.ConversationId == conversationId && p.UserId == userId);
+            return await Context.ConversationParticipants.AnyAsync(p => p.ConversationId == conversationId && p.UserId == userId, cancellationToken);
         }
 
-        public PagedList<Message> FindMessages(Guid conversationId, PaginationParams pagination)
+        public async Task<PagedList<Message>> FindMessages(Guid conversationId, PaginationParams pagination, CancellationToken cancellationToken = default)
         {
             var query = Context.Messages.Where(m => m.ConversationId == conversationId);
-            var total = query.Count();
-            var items = query
+            var total = await query.CountAsync(cancellationToken);
+            var items = await query
                 .Include(m => m.Attachments)
                 .OrderByDescending(m => m.CreatedAt)
                 .Skip(pagination.Offset)
                 .Take(pagination.PageSize)
-                .ToList();
+                .ToListAsync(cancellationToken);
 
             return ToPagedList(items, total, pagination);
         }

@@ -12,34 +12,34 @@ namespace Nokubico.Infra.Data.Repository.Auth
         {
         }
 
-        public Session? FindActiveByToken(string token)
+        public async Task<Session?> FindActiveByToken(string token, CancellationToken cancellationToken = default)
         {
-            return Context.Sessions
+            return await Context.Sessions
                 .Include(s => s.User)
-                .FirstOrDefault(s => s.Token == token && s.ExpiresAt > DateTime.UtcNow);
+                .FirstOrDefaultAsync(s => s.Token == token && s.ExpiresAt > DateTime.UtcNow, cancellationToken);
         }
 
-        public Session Save(Session session)
+        public async Task<Session> Save(Session session, CancellationToken cancellationToken = default)
         {
             if (!Context.Sessions.Contains(session)) Context.Sessions.Add(session);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync(cancellationToken);
             return session;
         }
 
-        public void Delete(Session session)
+        public async Task Delete(Session session, CancellationToken cancellationToken = default)
         {
             Context.Sessions.Remove(session);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync(cancellationToken);
         }
 
-        public void DeleteAllForUser(Guid userId)
+        public async Task DeleteAllForUser(Guid userId, CancellationToken cancellationToken = default)
         {
-            Context.Sessions.Where(s => s.UserId == userId).ExecuteDelete();
+            await Context.Sessions.Where(s => s.UserId == userId).ExecuteDeleteAsync(cancellationToken);
         }
 
-        public long DeleteExpired(DateTime now)
+        public async Task<long> DeleteExpired(DateTime now, CancellationToken cancellationToken = default)
         {
-            return Context.Sessions.Where(s => s.ExpiresAt < now).ExecuteDelete();
+            return await Context.Sessions.Where(s => s.ExpiresAt < now).ExecuteDeleteAsync(cancellationToken);
         }
     }
 }

@@ -13,73 +13,73 @@ namespace Nokubico.Infra.Data.Repository.Companies
         {
         }
 
-        public Company? FindById(Guid id)
+        public async Task<Company?> FindById(Guid id, CancellationToken cancellationToken = default)
         {
-            return Context.Companies
+            return await Context.Companies
                 .Include(c => c.Members)
                 .Include(c => c.Follows)
-                .FirstOrDefault(c => c.Id == id);
+                .FirstOrDefaultAsync(c => c.Id == id, cancellationToken);
         }
 
-        public PagedList<Company> FindAll(PaginationParams pagination)
+        public async Task<PagedList<Company>> FindAll(PaginationParams pagination, CancellationToken cancellationToken = default)
         {
-            var total = Context.Companies.Count();
-            var items = Context.Companies
+            var total = await Context.Companies.CountAsync(cancellationToken);
+            var items = await Context.Companies
                 .OrderBy(c => c.CreatedAt)
                 .Skip(pagination.Offset)
                 .Take(pagination.PageSize)
-                .ToList();
+                .ToListAsync(cancellationToken);
 
             return ToPagedList(items, total, pagination);
         }
 
-        public Company Save(Company company)
+        public async Task<Company> Save(Company company, CancellationToken cancellationToken = default)
         {
             if (!Context.Companies.Contains(company)) Context.Companies.Add(company);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync(cancellationToken);
             return company;
         }
 
-        public void Delete(Company company)
+        public async Task Delete(Company company, CancellationToken cancellationToken = default)
         {
             Context.Companies.Remove(company);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync(cancellationToken);
         }
 
-        public CompanyMember? FindMember(Guid companyId, Guid userId)
+        public async Task<CompanyMember?> FindMember(Guid companyId, Guid userId, CancellationToken cancellationToken = default)
         {
-            return Context.CompanyMembers.FirstOrDefault(m => m.CompanyId == companyId && m.UserId == userId);
+            return await Context.CompanyMembers.FirstOrDefaultAsync(m => m.CompanyId == companyId && m.UserId == userId, cancellationToken);
         }
 
-        public CompanyMember SaveMember(CompanyMember member)
+        public async Task<CompanyMember> SaveMember(CompanyMember member, CancellationToken cancellationToken = default)
         {
             if (!Context.CompanyMembers.Contains(member)) Context.CompanyMembers.Add(member);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync(cancellationToken);
             return member;
         }
 
-        public void DeleteMember(CompanyMember member)
+        public async Task DeleteMember(CompanyMember member, CancellationToken cancellationToken = default)
         {
             Context.CompanyMembers.Remove(member);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync(cancellationToken);
         }
 
-        public CompanyFollow SaveFollow(CompanyFollow follow)
+        public async Task<CompanyFollow> SaveFollow(CompanyFollow follow, CancellationToken cancellationToken = default)
         {
             if (!Context.CompanyFollows.Contains(follow)) Context.CompanyFollows.Add(follow);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync(cancellationToken);
             return follow;
         }
 
-        public void DeleteFollow(CompanyFollow follow)
+        public async Task DeleteFollow(CompanyFollow follow, CancellationToken cancellationToken = default)
         {
             Context.CompanyFollows.Remove(follow);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync(cancellationToken);
         }
 
-        public bool IsFollowing(Guid companyId, Guid userId)
+        public async Task<bool> IsFollowing(Guid companyId, Guid userId, CancellationToken cancellationToken = default)
         {
-            return Context.CompanyFollows.Any(f => f.CompanyId == companyId && f.UserId == userId);
+            return await Context.CompanyFollows.AnyAsync(f => f.CompanyId == companyId && f.UserId == userId, cancellationToken);
         }
     }
 }

@@ -5,14 +5,14 @@ namespace Nokubico.Domain.Interface.Auth
 {
     public interface ISessionRepository
     {
-        Session? FindActiveByToken(string token);
+        Task<Session?> FindActiveByToken(string token, CancellationToken cancellationToken = default);
 
-        Session Save(Session session);
+        Task<Session> Save(Session session, CancellationToken cancellationToken = default);
 
-        void Delete(Session session);
+        Task Delete(Session session, CancellationToken cancellationToken = default);
 
-        void DeleteAllForUser(Guid userId);
+        Task DeleteAllForUser(Guid userId, CancellationToken cancellationToken = default);
 
-        long DeleteExpired(DateTime now);
+        Task<long> DeleteExpired(DateTime now, CancellationToken cancellationToken = default);
     }
 }

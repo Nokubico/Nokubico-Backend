@@ -1,0 +1,893 @@
+﻿# NOkubico Backend — Planeamento de Tarefas (Jira)
+
+Documento de apoio para o **Jira**: cada bloco abaixo é **uma tarefa pronta a copiar**. Objetivo da linha de trabalho: **ter todos os controllers criados**, com DTOs seguros, serviços com validações e controllers finos (sem lógica de negócio).
+
+Equipa: **3 devs** (Dev A, Dev B, Dev C). As tarefas estão divididas por **4 sprints**, com dependências assinaladas, para permitir trabalho em paralelo.
+
+---
+
+## Regras da equipa (ler antes de começar)
+
+Estas convenções aplicam-se a **todas** as tarefas:
+
+| Regra | Descrição |
+|-------|-----------|
+| **Mapeamento** | **Manual, sem bibliotecas externas** (sem AutoMapper): classes estáticas em `Nokubico.Application/Mapping` (ex.: `UserMapper.ToDto(...)`). Cada serviço converte explicitamente. |
+| **Arquitetura** | API → Application (DTO + Service) → Domain (regras) → Infra (repositórios). O Controller **não** acede a repositórios/DbContext. |
+| **Controllers finos** | Só recebem o DTO de entrada, chamam o serviço e devolvem o resultado. Sem `if` de negócio dentro do controller. |
+| **DTOs** | `XxxDTO` (saída) separado de `CreateXxxDTO`/`UpdateXxxDTO` (entrada). **Nunca** expor: `Password`, hashes, `Token` (exceto no login), `AccountId`/`ProviderId`/tokens OAuth, colunas internas não necessárias. |
+| **Validações** | Toda a validação de entrada fica no **serviço** (Application), não no controller nem na entidade. |
+| **Autenticação** | Endpoints protegidos com `[Authorize]`; obter o utilizador atual com `User.GetUserId()` (extensão já existente em `Nokubico.API/Extensions`). |
+| **Paginação** | Listas usam `PaginationParams` + `PagedList<T>` (já existentes em `Nokubico.Domain/Pagination`). |
+| **Erros** | Sempre através do middleware global de exceções (tarefa NOK-06); os serviços lançam exceções de domínio, o middleware devolve o formato padrão. |
+| **Uploads** | A BD guarda apenas a **URL**; o ficheiro vai para `IStorageService` (Infra.Services). Usar `StorageFolder` (`Profiles`, `Posts`, `Products`, `Messages`, `Deliverables`). |
+| **Moeda** | Valores em unidades mínimas (`long`, cêntimos). Nunca `double`/`float`. |
+| **Commit** | Um PR por tarefa, referenciando o número Jira (ex.: `NOK-05`). |
+
+---
+
+## Visão geral das Sprints
+
+| Sprint | Foco | Tarefas | Devs principais |
+|--------|------|---------|-----------------|
+| **Sprint 1** | Fundação, DTOs, Auth & Utilizadores | NOK-01 a NOK-07 | A, B, C |
+| **Sprint 2** | Comunidade (Posts) + Uploads | NOK-08 a NOK-12 | A, B |
+| **Sprint 3** | Marketplace, Pedidos, Carteira/Escrow | NOK-13 a NOK-20 | B, C |
+| **Sprint 4** | Mensagens, Empresas, Admin, IA, Polimento | NOK-21 a NOK-27 | A, B, C |
+
+> **Ordem sugerida por dev:**
+> - **Dev A:** NOK-01 → NOK-06 → NOK-07 → NOK-09 → NOK-22 → NOK-26
+> - **Dev B:** NOK-02 → NOK-03 → NOK-08 → NOK-11 → NOK-13 → NOK-17 → NOK-23
+> - **Dev C:** NOK-04 → NOK-05 → NOK-10 → NOK-14 → NOK-18 → NOK-24 → NOK-27
+
+---
+
+# SPRINT 1 — Fundação, DTOs, Autenticação & Utilizadores
+
+---
+
+### [NOK-01] Criar a base de mapeamento manual (Entity ↔ DTO)
+
+- **Sprint:** 1 · **Módulo:** Transversal · **Prioridade:** Alta
+- **Dev:** Dev A · **Dependências:** nenhuma · **Estimativa:** 1 dia
+
+**Objetivo:**
+Criar a camada de conversão manual entre entidades e DTOs, **sem bibliotecas externas** (sem AutoMapper). Cada serviço usa estes mappers explicitamente, garantindo que **nunca** se expõem campos sensíveis.
+
+**O que fazer:**
+1. Criar em `Nokubico.Application/Mapping/` classes estáticas de mapeamento por entidade (padrão `XxxMapper`):
+   - `UserMapper` (ex.: `static UserDTO ToDto(User user)`; `static User Apply(UserUpdateDTO dto, User user)`).
+2. Regras:
+   - Métodos de **saída** (`ToDto`) copiam apenas campos públicos/permitidos (nunca `Password`, tokens, coleções internas).
+   - Métodos de **entrada/aplicação** (`Apply`) atualizam apenas os campos editáveis do DTO.
+3. Criar o mapeamento `User → UserDTO` como referência para as restantes tarefas.
+4. **Não** adicionar packages externos de mapeamento; a conversão é manual e explícita.
+
+**Ficheiros:**
+- Criar: `Nokubico.Application/Mapping/UserMapper.cs` (e demais `XxxMapper` à medida que os DTOs surgirem)
+
+**Critérios de aceitação:**
+- [ ] `dotnet build` passa sem erros.
+- [ ] Existe um mapper de exemplo (`User → UserDTO`) que omite campos sensíveis.
+- [ ] Nenhuma dependência externa de mapeamento adicionada.
+
+---
+
+### [NOK-02] DTOs de Utilizador e Autenticação (seguros)
+
+- **Sprint:** 1 · **Módulo:** Utilizadores & Auth · **Prioridade:** Alta
+- **Dev:** Dev B · **Dependências:** NOK-01 · **Estimativa:** 1 dia
+
+**Objetivo:**
+Criar todos os DTOs de entrada/saída do módulo de utilizadores e autenticação, garantindo que **nenhum dado sensível** vaza.
+
+**O que fazer:**
+1. Criar em `Nokubico.Application/DTOs/`:
+   - `RegisterDTO` (Name, Email, Password, Profession?) — **entrada**
+   - `LoginDTO` (Email, Password) — **entrada**
+   - `UserDTO` (Id, Name, Email, Image, Bio, Location, Profession, Role, EmailVerified, CreatedAt) — **saída** (sem password/accounts)
+   - `UserUpdateDTO` (Name, Bio, Location, Profession, Image?) — **entrada**
+   - `UserTokenDTO` (Token, Email, Role) — **saída** do login/registo
+2. Adicionar data annotations de validação (Email válido, Password min 6, Nome obrigatório) com mensagens em PT.
+3. Criar/atualizar o `UserMapper` em `Nokubico.Application/Mapping/` (`User → UserDTO`; aplicar `UserUpdateDTO`/`RegisterDTO` apenas com os campos permitidos).
+
+**Ficheiros:**
+- Criar: `Nokubico.Application/DTOs/RegisterDTO.cs`, `LoginDTO.cs`, `UserDTO.cs`, `UserUpdateDTO.cs`, `UserTokenDTO.cs`
+- Criar: `Nokubico.Application/Mapping/UserMapper.cs`
+
+**Validações/Segurança:**
+- [ ] `UserDTO` **nunca** contém `Password`, tokens, nem coleções `Accounts`/`Sessions`.
+- [ ] `UserUpdateDTO` não permite alterar `Email` nem `Role` por este fluxo.
+
+**Critérios de aceitação:**
+- [ ] DTOs criados e validados; mapeamentos no perfil.
+- [ ] Compilação sem erros e sem exposição de dados sensíveis nos DTOs de saída.
+
+---
+
+### [NOK-03] AuthService — registo, login e geração de token
+
+- **Sprint:** 1 · **Módulo:** Autenticação · **Prioridade:** Alta
+- **Dev:** Dev B · **Dependências:** NOK-02 · **Estimativa:** 1,5 dia
+
+**Objetivo:**
+Criar o serviço de autenticação em Application, que orquestra `IAuthenticate` (Infra.Data/Identity) e devolve DTOs. O `AuthController` passa a depender deste serviço (não de `IAuthenticate` diretamente).
+
+**O que fazer:**
+1. Criar `Nokubico.Application/Services/AuthService.cs` com interface `IAuthService` em `Nokubico.Application/Interfaces/`.
+2. Métodos:
+   - `UserTokenDTO Register(RegisterDTO dto)` — valida email/password, chama `IAuthenticate.Register`, gera token.
+   - `UserTokenDTO Login(LoginDTO dto)` — valida credenciais, devolve token ou lança exceção de domínio.
+   - `UserDTO GetCurrentUser(Guid userId)` — devolve o perfil do utilizador autenticado.
+3. Validações no serviço: email obrigatório e formato válido, password com mínimo de 6, utilizador não pode registar email já existente (lançar exceção clara).
+4. Registrar `IAuthService` na DI (`ServiceCollectionExtensions`).
+
+**Ficheiros:**
+- Criar: `Nokubico.Application/Services/AuthService.cs`, `Nokubico.Application/Interfaces/IAuthService.cs`
+- Editar: `Nokubico.Infra.Ioc/ServiceCollectionExtensions.cs`
+
+**Validações/Segurança:**
+- [ ] Nunca logar/retornar password.
+- [ ] Mensagens de erro em PT e genéricas em login (não revelar se o email existe).
+
+**Critérios de aceitação:**
+- [ ] Registo cria user + account + wallet e devolve token.
+- [ ] Login com credenciais erradas falha com 401.
+- [ ] Controllers passam a usar `IAuthService` (ver NOK-05).
+
+---
+
+### [NOK-04] UserService — perfil, atualização e eliminação
+
+- **Sprint:** 1 · **Módulo:** Utilizadores · **Prioridade:** Alta
+- **Dev:** Dev C · **Dependências:** NOK-02 · **Estimativa:** 1 dia
+
+**Objetivo:**
+Serviço de gestão do perfil do utilizador autenticado (RF008 — perfis públicos).
+
+**O que fazer:**
+1. Criar `Nokubico.Application/Services/UserService.cs` + `IUserService` em `Nokubico.Application/Interfaces/`.
+2. Métodos:
+   - `UserDTO GetById(Guid id)` — devolve perfil (público) pelo id.
+   - `UserDTO GetProfile(Guid userId)` — perfil do próprio utilizador.
+   - `UserDTO Update(Guid userId, UserUpdateDTO dto)` — atualiza nome/bio/localização/profissão/imagem.
+   - `void Delete(Guid userId)` — elimina a conta (erasure), apenas o próprio ou admin.
+3. Usa `IUserRepository`; valida que o utilizador existe; converte com o `UserMapper` (manual).
+4. Registar na DI.
+
+**Ficheiros:**
+- Criar: `Nokubico.Application/Services/UserService.cs`, `Nokubico.Application/Interfaces/IUserService.cs`
+- Editar: `Nokubico.Infra.Ioc/ServiceCollectionExtensions.cs`
+
+**Validações/Segurança:**
+- [ ] `Update` e `Delete` só atuam sobre o próprio utilizador (passar `userId` dos claims; validar no serviço).
+
+**Critérios de aceitação:**
+- [ ] Perfil atualizável e consultável via API (após NOK-07).
+- [ ] Não é possível editar outro utilizador.
+
+---
+
+### [NOK-05] Refatorar AuthController + criar UserController
+
+- **Sprint:** 1 · **Módulo:** Autenticação & Utilizadores · **Prioridade:** Alta
+- **Dev:** Dev C · **Dependências:** NOK-03, NOK-04 · **Estimativa:** 1 dia
+
+**Objetivo:**
+Controllers finos que usam os serviços, com DTOs de entrada/saída e autenticação.
+
+**O que fazer:**
+1. Refatorar `Nokubico.API/Controllers/AuthController.cs`:
+   - Usar `IAuthService` (injeta o serviço, não `IAuthenticate`).
+   - `POST api/auth/register` recebe `RegisterDTO`, devolve `UserTokenDTO`.
+   - `POST api/auth/login` recebe `LoginDTO`, devolve `UserTokenDTO`.
+   - Remover os `Models` antigos (`RegisterModel`, `LoginModel`, `UserToken`) que ficam obsoletos — **mover para DTOs**.
+2. Criar `Nokubico.API/Controllers/UserController.cs`:
+   - `GET api/user/me` → perfil atual (`[Authorize]`, `User.GetUserId()`)
+   - `PUT api/user/me` → atualizar perfil (`[Authorize]`)
+   - `DELETE api/user/me` → eliminar conta (`[Authorize]`)
+   - `GET api/user/{id}` → perfil público
+3. Manter o controller sem lógica de negócio (só chama serviços e devolve resultados).
+
+**Ficheiros:**
+- Editar: `Nokubico.API/Controllers/AuthController.cs`
+- Criar: `Nokubico.API/Controllers/UserController.cs`
+- Apagar (opcional, após migrar): `Nokubico.API/Models/RegisterModel.cs`, `LoginModel.cs`, `UserToken.cs`
+
+**Critérios de aceitação:**
+- [ ] Fluxos register/login funcionais no Swagger (com JWT a funcionar).
+- [ ] `api/user/me` protegido: sem token → 401; com token → perfil.
+- [ ] Controllers sem lógica de negócio.
+
+---
+
+### [NOK-06] Middleware global de exceções + resposta de erro padronizada
+
+- **Sprint:** 1 · **Módulo:** Transversal · **Prioridade:** Alta
+- **Dev:** Dev A · **Dependências:** nenhuma · **Estimativa:** 1 dia
+
+**Objetivo:**
+Centralizar o tratamento de erros para que nenhum controller tenha `try/catch` e as respostas de erro sejam consistentes.
+
+**O que fazer:**
+1. Criar `Nokubico.API/Errors/ApiException.cs` (exceção de domínio com código HTTP) e `Nokubico.API/Errors/ErrorResponse.cs` (modelo: `status`, `message`, `errors?`).
+2. Criar `Nokubico.API/Middleware/ExceptionMiddleware.cs`:
+   - Captura exceções; devolve `ErrorResponse` com código HTTP apropriado.
+   - `ApiException` → código da exceção (400/404/403…).
+   - `DbUpdateException`/`DbUpdateConcurrencyException` → 409.
+   - Qualquer outra → 500 com mensagem genérica (sem detalhes internos).
+3. Registar o middleware no `Program.cs` (`app.UseMiddleware<ExceptionMiddleware>()` **antes** de qualquer outro).
+4. Adicionar uma classe base `DomainException` em `Nokubico.Domain/Validation/` para os serviços lançarem erros de domínio (com mensagem em PT).
+
+**Ficheiros:**
+- Criar: `Nokubico.API/Errors/*`, `Nokubico.API/Middleware/ExceptionMiddleware.cs`, `Nokubico.Domain/Validation/DomainException.cs`
+- Editar: `Nokubico.API/Program.cs`
+
+**Critérios de aceitação:**
+- [ ] Um erro de domínio lançado num serviço devolve JSON padronizado (não stack trace).
+- [ ] 401/403 não são engolidos pelo middleware (delegar para o pipeline quando a resposta já começou).
+
+---
+
+### [NOK-07] Swagger com autenticação JWT + CORS
+
+- **Sprint:** 1 · **Módulo:** Transversal · **Prioridade:** Média
+- **Dev:** Dev A · **Dependências:** nenhuma · **Estimativa:** 0,5 dia
+
+**Objetivo:**
+Permitir testar endpoints protegidos no Swagger (botão "Authorize") e configurar CORS para o frontend (React/Next.js em `http://localhost:5173`).
+
+**O que fazer:**
+1. No `Program.cs` (ou numa extensão em `Nokubico.API/Extensions/`), configurar `AddSwaggerGen` com `AddSecurityDefinition` do tipo `Bearer` (JWT) e `AddSecurityRequirement` global.
+2. Configurar CORS com política `FrontendPolicy` para `http://localhost:5173` (AllowAnyHeader, AllowAnyMethod).
+3. Chamar `app.UseCors("FrontendPolicy")` antes de `UseAuthentication`.
+
+**Ficheiros:**
+- Editar: `Nokubico.API/Program.cs`
+
+**Critérios de aceitação:**
+- [ ] No Swagger, o botão "Authorize" aceita `Bearer <token>` e os endpoints protegidos passam a responder 200.
+- [ ] CORS ativo para o frontend.
+
+---
+
+# SPRINT 2 — Comunidade (Posts) e Uploads
+
+---
+
+### [NOK-08] DTOs de Postagens e Interações
+
+- **Sprint:** 2 · **Módulo:** Comunidade · **Prioridade:** Alta
+- **Dev:** Dev B · **Dependências:** NOK-01 · **Estimativa:** 1 dia
+
+**Objetivo:**
+DTOs do módulo de comunidade (RF013/RF014) com dados de feed completos e seguros.
+
+**O que fazer:**
+1. Criar em `Nokubico.Application/DTOs/`:
+   - `CreatePostDTO` (Content?, ImageUrl?, VideoUrl?) — entrada (validação: pelo menos um campo não vazio)
+   - `UpdatePostDTO` (Content?, ImageUrl?, VideoUrl?)
+   - `PostDTO` (Id, Content, ImageUrl, VideoUrl, CreatedAt, Autor: `UserSummaryDTO`, contadores: Likes, Comments, Shares, flags: LikedByMe, BookmarkedByMe)
+   - `UserSummaryDTO` (Id, Name, Image, Profession) — resumo do autor (sem email/role)
+   - `CommentDTO` (Id, Content, CreatedAt, Author: `UserSummaryDTO`)
+   - `CreateCommentDTO` (Content)
+   - `LikeDTO`, `ShareDTO`, `BookmarkDTO` (simples, com UserId/PostId se necessário)
+2. Criar o `PostMapper` em `Nokubico.Application/Mapping/` (incluindo composição `Post → PostDTO` com autor e contadores).
+
+**Ficheiros:**
+- Criar: `Nokubico.Application/DTOs/*Post*.cs`, `UserSummaryDTO.cs`, `CommentDTO.cs`, etc.
+- Criar: `Nokubico.Application/Mapping/UserMapper.cs`
+
+**Validações/Segurança:**
+- [ ] `PostDTO` não expõe campos internos; autor usa `UserSummaryDTO` (sem email).
+- [ ] URLs de imagem/vídeo são strings (nunca conteúdo binário).
+
+**Critérios de aceitação:**
+- [ ] DTOs criados e mapeados.
+
+---
+
+### [NOK-09] PostService — feed, CRUD e interações
+
+- **Sprint:** 2 · **Módulo:** Comunidade · **Prioridade:** Alta
+- **Dev:** Dev A · **Dependências:** NOK-08 · **Estimativa:** 2 dias
+
+**Objetivo:**
+Serviço de comunidade com toda a lógica de posts, likes, comentários, partilhas e bookmarks (RF013).
+
+**O que fazer:**
+1. Criar `Nokubico.Application/Services/PostService.cs` + `IPostService`.
+2. Métodos:
+   - `PagedList<PostDTO> GetFeed(Guid? currentUserId, PaginationParams p)` — usa `IPostRepository.FindFeed` + contadores/flags (`CountLikes`, `IsLikedBy`, …).
+   - `PostDTO GetById(Guid id, Guid? currentUserId)`.
+   - `PostDTO Create(Guid authorId, CreatePostDTO dto)` — se vier `ImageUrl`/`VideoUrl`, validar.
+   - `PostDTO Update(Guid postId, Guid userId, UpdatePostDTO dto)` — valida que é o autor (ou admin).
+   - `void Delete(Guid postId, Guid userId)` — autor ou admin.
+   - `void Like(Guid postId, Guid userId)` / `void Unlike(...)` — usa `FindLike` + `SaveLike`/`DeleteLike`.
+   - `CommentDTO AddComment(Guid postId, Guid userId, CreateCommentDTO dto)`.
+   - `void Share(Guid postId, Guid userId)`; `void Bookmark/Unbookmark(...)`.
+3. Validações: post existe; autor/ownership; comentário com conteúdo não vazio.
+4. Registrar na DI.
+
+**Ficheiros:**
+- Criar: `Nokubico.Application/Services/PostService.cs`, `Nokubico.Application/Interfaces/IPostService.cs`
+- Editar: `Nokubico.Infra.Ioc/ServiceCollectionExtensions.cs`
+
+**Validações/Segurança:**
+- [ ] Só o autor (ou admin) edita/apaga o post.
+- [ ] Like/Bookmark repetidos são idempotentes ou devolvem estado claro.
+
+**Critérios de aceitação:**
+- [ ] Feed paginado com contadores e flags do utilizador.
+- [ ] Interações criadas/removidas corretamente (toggles).
+
+---
+
+### [NOK-10] PostController — endpoints da comunidade
+
+- **Sprint:** 2 · **Módulo:** Comunidade · **Prioridade:** Alta
+- **Dev:** Dev C · **Dependências:** NOK-09 · **Estimativa:** 1 dia
+
+**Objetivo:**
+Expor a comunidade via API REST, com endpoints finos.
+
+**O que fazer:**
+1. Criar `Nokubico.API/Controllers/PostController.cs`:
+   - `GET api/post/feed` (paginação; público ou `[Authorize]` se quisermos flags pessoais)
+   - `GET api/post/{id}` (público)
+   - `POST api/post` (`[Authorize]`)
+   - `PUT api/post/{id}` (`[Authorize]`)
+   - `DELETE api/post/{id}` (`[Authorize]`)
+   - `POST api/post/{id}/like` e `DELETE api/post/{id}/like` (`[Authorize]`)
+   - `GET api/post/{id}/comments` (paginação)
+   - `POST api/post/{id}/comments` (`[Authorize]`)
+   - `POST api/post/{id}/share` (`[Authorize]`)
+   - `POST api/post/{id}/bookmark` e `DELETE api/post/{id}/bookmark` (`[Authorize]`)
+2. Usar `User.GetUserId()` para os endpoints autenticados.
+3. Adicionar exemplo ao `Nokubico.API.http` se existir.
+
+**Ficheiros:**
+- Criar: `Nokubico.API/Controllers/PostController.cs`
+
+**Critérios de aceitação:**
+- [ ] Todos os endpoints testáveis no Swagger; 401 sem token nos protegidos.
+- [ ] Feed devolve `PagedList<PostDTO>`.
+
+---
+
+### [NOK-11] UploadService + UploadController (ficheiros)
+
+- **Sprint:** 2 · **Módulo:** Transversal/Storage · **Prioridade:** Média
+- **Dev:** Dev B · **Dependências:** NOK-01 · **Estimativa:** 1,5 dia
+
+**Objetivo:**
+Permitir enviar ficheiros (imagens de perfil/posts/produtos, anexos de mensagens) que a BD guarda como URL, usando o `IStorageService` existente.
+
+**O que fazer:**
+1. Criar `Nokubico.Application/Services/UploadService.cs` + `IUploadService`:
+   - `string Upload(StorageFolder folder, byte[] content, string fileName, string contentType)` — delega em `IStorageService`.
+   - Validações: tamanho máximo (ex.: 10 MB), `contentType` permitido por pasta (imagens: `image/png`, `image/jpeg`, `image/webp`; vídeos; pdfs para deliverables), extensão segura.
+2. Criar `Nokubico.API/Controllers/UploadController.cs`:
+   - `POST api/upload/{folder}` (`[Authorize]`) — aceita `IFormFile`, chama `UploadService`, devolve `{ "url": "/profiles/..." }`.
+   - Restringir pastas ao enum `StorageFolder` (validação por whitelist).
+3. O DTO de resposta `UploadResultDTO` (Url, FileName, Size, ContentType).
+
+**Ficheiros:**
+- Criar: `Nokubico.Application/Services/UploadService.cs`, `Nokubico.Application/Interfaces/IUploadService.cs`, `Nokubico.API/Controllers/UploadController.cs`, `Nokubico.Application/DTOs/UploadResultDTO.cs`
+- Editar: `Nokubico.Infra.Ioc/ServiceCollectionExtensions.cs`
+
+**Validações/Segurança:**
+- [ ] Rejeitar tipos/ficheiros fora da whitelist (evitar executáveis).
+- [ ] Limite de tamanho; nome sanitizado (o `StorageService` já gera prefixo único).
+
+**Critérios de aceitação:**
+- [ ] Upload devolve URL pública; o ficheiro é gravado na pasta correta.
+- [ ] Tipo inválido/tamanho excessivo → 400.
+
+---
+
+### [NOK-12] Validação e regras de negócio de conteúdos
+
+- **Sprint:** 2 · **Módulo:** Comunidade · **Prioridade:** Média
+- **Dev:** Dev B · **Dependências:** NOK-09 · **Estimativa:** 0,5 dia
+
+**Objetivo:**
+Centralizar as regras de conteúdo (RF014 — reportar conteúdo) para não as espalhar pelos services.
+
+**O que fazer:**
+1. Criar em `Nokubico.Application/Services/` um validador `ContentValidator` (helper) usado pelo `PostService`/`CommentService`:
+   - Post/comentário não pode estar vazio (texto/URL obrigatório).
+   - Comprimento máximo (ex.: 2000 caracteres post, 500 comentário).
+   - URLs de mídia devem ser URLs válidas (http/https) e apontar para o nosso storage quando `ImageUrl`/`VideoUrl` forem preenchidas.
+2. Criar `CreateReportDTO` + `ReportService`/`ReportController` **esqueleto** (a tabela `user_report` é planeada) OU deixar documentado como extensão futura — **nesta sprint apenas validar**, não criar endpoint de report.
+3. Garantir mensagens de erro em PT e reutilizáveis (`DomainException`).
+
+**Ficheiros:**
+- Criar: `Nokubico.Application/Services/ContentValidator.cs`
+
+**Critérios de aceitação:**
+- [ ] Regras aplicadas em `PostService.Create/Update` e `AddComment`.
+- [ ] Mensagens claras em PT.
+
+---
+
+# SPRINT 3 — Marketplace, Pedidos, Carteira e Escrow
+
+---
+
+### [NOK-13] DTOs de Produtos, Imagens e Avaliações
+
+- **Sprint:** 3 · **Módulo:** Marketplace · **Prioridade:** Alta
+- **Dev:** Dev B · **Dependências:** NOK-01 · **Estimativa:** 1 dia
+
+**Objetivo:**
+DTOs do catálogo (RF002/RF009) sem expor `downloadUrl` publicamente.
+
+**O que fazer:**
+1. Criar em `Nokubico.Application/DTOs/`:
+   - `CreateProductDTO` (Title, Slug?, Description?, Category, Price, Currency, License, ThumbnailUrl, ImageUrls[])
+   - `UpdateProductDTO` (Title, Description, Category, Price, Currency, License, ThumbnailUrl, ImageUrls[])
+   - `ProductDTO` (Id, Title, Slug, Description, Category, Price, Currency, ThumbnailUrl, License, Status, Creator: `UserSummaryDTO`, Images: `ProductImageDTO[]`, AverageRating, ReviewsCount, CreatedAt)
+   - `ProductImageDTO` (ImageUrl, Position)
+   - `CreateReviewDTO` (Rating, Comment?) e `ReviewDTO` (Id, Rating, Comment, CreatedAt, Author: `UserSummaryDTO`)
+2. Criar `ProductMapper` e `ReviewMapper` em `Nokubico.Application/Mapping/`.
+
+**Validações/Segurança:**
+- [ ] `ProductDTO` **não** contém `DownloadUrl` (só é devolvido após compra confirmada, num fluxo próprio — ver NOK-17).
+- [ ] `Price` como `long` (cêntimos).
+
+**Critérios de aceitação:**
+- [ ] DTOs criados e mapeados, sem `DownloadUrl` público.
+
+---
+
+### [NOK-14] ProductService — catálogo, CRUD de vendedor e avaliações
+
+- **Sprint:** 3 · **Módulo:** Marketplace · **Prioridade:** Alta
+- **Dev:** Dev C · **Dependências:** NOK-13 · **Estimativa:** 2 dias
+
+**Objetivo:**
+Serviço de produtos com ciclo de vida (`Draft → Published → Disabled`), busca e avaliações (RF007/RF009).
+
+**O que fazer:**
+1. Criar `Nokubico.Application/Services/ProductService.cs` + `IProductService`.
+2. Métodos:
+   - `PagedList<ProductDTO> GetPublished(string? category, PaginationParams p)` — catálogo público.
+   - `ProductDTO GetById(Guid id, Guid? currentUserId)` — se não publicado, só owner/admin.
+   - `ProductDTO Create(Guid creatorId, CreateProductDTO dto)` — guarda imagens (URLs), `Status=Draft`.
+   - `ProductDTO Update(Guid productId, Guid userId, UpdateProductDTO dto)` — valida ownership.
+   - `void Publish(Guid productId, Guid userId)` / `void Disable(...)` — mudança de status com validação.
+   - `void Delete(Guid productId, Guid userId)` — owner/admin.
+   - `PagedList<ProductDTO> GetMyProducts(Guid creatorId, PaginationParams p)` — dashboard vendedor.
+   - `ReviewDTO AddReview(Guid productId, Guid userId, CreateReviewDTO dto)` — só comprador? validar; uma review por user (o repo já tem `UNIQUE`); `GetAverageRating`.
+3. Validações: preço >= 0, slug único, categoria obrigatória, imagens limitadas (ex.: máx 10).
+4. Registrar na DI.
+
+**Ficheiros:**
+- Criar: `Nokubico.Application/Services/ProductService.cs`, `Nokubico.Application/Interfaces/IProductService.cs`
+- Editar: `Nokubico.Infra.Ioc/ServiceCollectionExtensions.cs`
+
+**Validações/Segurança:**
+- [ ] Apenas o `creatorId` altera o produto.
+- [ ] `DownloadUrl` nunca sai no catálogo.
+
+**Critérios de aceitação:**
+- [ ] Catálogo só devolve `Published`.
+- [ ] CRUD + reviews + rating a funcionar via serviço.
+
+---
+
+### [NOK-15] ProductController — endpoints do marketplace
+
+- **Sprint:** 3 · **Módulo:** Marketplace · **Prioridade:** Alta
+- **Dev:** Dev C · **Dependências:** NOK-14 · **Estimativa:** 1 dia
+
+**Objetivo:**
+Expor catálogo e gestão de produtos.
+
+**O que fazer:**
+1. Criar `Nokubico.API/Controllers/ProductController.cs`:
+   - `GET api/product` (público, `?category=`)
+   - `GET api/product/{id}` (público)
+   - `GET api/product/me` (`[Authorize]`, dashboard vendedor)
+   - `POST api/product` (`[Authorize]`)
+   - `PUT api/product/{id}` (`[Authorize]`)
+   - `POST api/product/{id}/publish` e `POST api/product/{id}/disable` (`[Authorize]`)
+   - `DELETE api/product/{id}` (`[Authorize]`)
+   - `GET api/product/{id}/reviews` (paginação)
+   - `POST api/product/{id}/reviews` (`[Authorize]`)
+2. Paginação consistente em todas as listas.
+
+**Ficheiros:**
+- Criar: `Nokubico.API/Controllers/ProductController.cs`
+
+**Critérios de aceitação:**
+- [ ] Catálogo público funcional; gestão protegida por `[Authorize]`.
+
+---
+
+### [NOK-16] DTOs de Pedidos e Itens
+
+- **Sprint:** 3 · **Módulo:** Pedidos · **Prioridade:** Alta
+- **Dev:** Dev B · **Dependências:** NOK-01 · **Estimativa:** 0,5 dia
+
+**Objetivo:**
+DTOs de `Order`/`OrderItem` com snapshots (RF011 — histórico de pedidos).
+
+**O que fazer:**
+1. Criar em `Nokubico.Application/DTOs/`:
+   - `CreateOrderDTO` (ProductIds[] ou ProductId, Quantity? — decidir se 1 item por pedido ou múltiplos)
+   - `OrderDTO` (Id, Status, PaymentStatus, PaymentMethod, Total, Currency, CreatedAt, Items: `OrderItemDTO[]`)
+   - `OrderItemDTO` (Id, ProductId, Title, Price, License — **snapshots**)
+2. Criar o mapper correspondente em `Nokubico.Application/Mapping/`.
+
+**Validações/Segurança:**
+- [ ] `OrderDTO` só devolve dados do próprio comprador (o serviço garante o scoping).
+- [ ] `Total` em `long` (cêntimos).
+
+**Critérios de aceitação:**
+- [ ] DTOs criados.
+
+---
+
+### [NOK-17] OrderService + CheckoutService (escrow: retenção do pagamento)
+
+- **Sprint:** 3 · **Módulo:** Pedidos/Escrow · **Prioridade:** Alta
+- **Dev:** Dev B · **Dependências:** NOK-16 · **Estimativa:** 2,5 dias
+
+**Objetivo:**
+Criar pedido com **retenção de escrow** (RF004/RF005/RF006): o valor sai do saldo do comprador e fica retido até confirmação de entrega.
+
+**O que fazer:**
+1. Criar `Nokubico.Application/Services/OrderService.cs` + `IOrderService`:
+   - `OrderDTO Create(Guid buyerId, CreateOrderDTO dto)` — valida produtos `Published`, calcula total, cria `Order`+`OrderItem` com snapshots.
+   - `PagedList<OrderDTO> GetMyOrders(Guid buyerId, PaginationParams p)`.
+   - `PagedList<OrderDTO> GetOrdersForSeller(Guid creatorId, PaginationParams p)` — via `IOrderRepository.FindBySeller`.
+   - `OrderDTO GetByIdForUser(Guid orderId, Guid userId)`.
+2. Criar `Nokubico.Application/Services/CheckoutService.cs` + `ICheckoutService`:
+   - `OrderDTO Checkout(Guid buyerId, CreateOrderDTO dto)` — transação: `OrderRepository` + `WalletRepository` (débito do comprador + `WalletTx` tipo `ESCROW_HOLD`).
+   - Validar saldo suficiente (`Balance >= Total`); se insuficiente → `DomainException`.
+   - Transação única com rollback em caso de falha (usar `AppDbContext.Database.BeginTransaction`).
+3. Registrar na DI.
+
+**Ficheiros:**
+- Criar: `Nokubico.Application/Services/OrderService.cs`, `CheckoutService.cs`, interfaces correspondentes
+- Editar: `Nokubico.Infra.Ioc/ServiceCollectionExtensions.cs`
+
+**Validações/Segurança:**
+- [ ] Scoping: buyer só vê os seus pedidos; seller só os seus.
+- [ ] Saldo nunca fica negativo; `wallet_txs` é imutável (`ON DELETE RESTRICT`).
+- [ ] Concorrência: revalidar saldo dentro da transação.
+
+**Critérios de aceitação:**
+- [ ] Ao comprar, o saldo do comprador baixa e fica uma `WalletTx` `ESCROW_HOLD`.
+- [ ] Saldo insuficiente → erro 400 com mensagem clara.
+
+---
+
+### [NOK-18] OrderController — compra, histórico e entrega
+
+- **Sprint:** 3 · **Módulo:** Pedidos · **Prioridade:** Alta
+- **Dev:** Dev C · **Dependências:** NOK-17 · **Estimativa:** 1 dia
+
+**Objetivo:**
+Endpoints de compra e histórico (RF005/RF011).
+
+**O que fazer:**
+1. Criar `Nokubico.API/Controllers/OrderController.cs`:
+   - `POST api/order` (`[Authorize]`) → cria pedido + escrow hold.
+   - `GET api/order` (`[Authorize]`) → histórico do comprador.
+   - `GET api/order/seller` (`[Authorize]`) → pedidos recebidos pelo vendedor.
+   - `GET api/order/{id}` (`[Authorize]`) → detalhe.
+   - `POST api/order/{id}/confirm-delivery` (`[Authorize]`) → confirma entrega (release do escrow — delegar no serviço; ver NOK-19).
+   - `POST api/order/{id}/dispute` (`[Authorize]`) → abre disputa.
+2. Controller fino: chama `IOrderService`/`ICheckoutService`.
+
+**Ficheiros:**
+- Criar: `Nokubico.API/Controllers/OrderController.cs`
+
+**Critérios de aceitação:**
+- [ ] Compra, histórico e confirmação de entrega funcionais.
+
+---
+
+### [NOK-19] EscrowService — libertação, reembolso e disputas
+
+- **Sprint:** 3 · **Módulo:** Escrow · **Prioridade:** Alta
+- **Dev:** Dev B · **Dependências:** NOK-17 · **Estimativa:** 2 dias
+
+**Objetivo:**
+Ciclo de vida do escrow (RF005/RF006): release, refund e disputa, com regras de negócio claras.
+
+**O que fazer:**
+1. Criar `Nokubico.Application/Services/EscrowService.cs` + `IEscrowService`:
+   - `void ConfirmDelivery(Guid orderId, Guid buyerId)` — liberta para o vendedor: crédita `Wallet` do vendedor (`ESCROW_RELEASE`), desconta taxa da plataforma (`FEE`) se aplicável, atualiza `Order.PaymentStatus`.
+   - `void Refund(Guid orderId, Guid adminOrBuyerId, string reason)` — devolve ao comprador (`ESCROW_REFUND`).
+   - `void OpenDispute(Guid orderId, Guid buyerId, string reason)` — estado `DISPUTED`.
+   - `void ResolveDispute(Guid orderId, Guid adminId, ResolutionResolution)` — decisão admin (release/refund) + `wallet_txs` correspondentes.
+2. Regras: release só após `Order.Status` de entrega; refund apenas em `HELD`/`DISPUTED`; admin é o único a resolver disputas.
+3. Transações atómicas; histórico imutável.
+4. Registrar na DI.
+
+**Ficheiros:**
+- Criar: `Nokubico.Application/Services/EscrowService.cs`, `Nokubico.Application/Interfaces/IEscrowService.cs`
+- Editar: `Nokubico.Infra.Ioc/ServiceCollectionExtensions.cs`
+
+**Validações/Segurança:**
+- [ ] Só o comprador confirma entrega; só admin resolve disputas.
+- [ ] Taxas calculadas e registadas como `wallet_txs` separadas.
+- [ ] Nunca permitir double-release.
+
+**Critérios de aceitação:**
+- [ ] Após confirmação, o vendedor recebe o valor (menos taxa) na carteira.
+- [ ] Disputa bloqueia release até resolução do admin.
+
+---
+
+### [NOK-20] DTOs, WalletService e WalletController
+
+- **Sprint:** 3 · **Módulo:** Carteira · **Prioridade:** Média
+- **Dev:** Dev C · **Dependências:** NOK-01 · **Estimativa:** 1 dia
+
+**Objetivo:**
+Carteira do utilizador: saldo e histórico de transações (RF011).
+
+**O que fazer:**
+1. DTOs: `WalletDTO` (Id, Balance, Currency, Status), `WalletTxDTO` (Id, Type, Amount, BalanceBefore, CreatedAt), `PagedList<WalletTxDTO>` no histórico.
+2. Criar `Nokubico.Application/Services/WalletService.cs` + `IWalletService`:
+   - `WalletDTO GetBalance(Guid userId)`.
+   - `PagedList<WalletTxDTO> GetTransactions(Guid userId, PaginationParams p)`.
+   - (Opcional, se necessário) `void Deposit(Guid userId, long amount, string method)` — apenas esqueleto, sem gateway.
+3. Criar `Nokubico.API/Controllers/WalletController.cs`:
+   - `GET api/wallet` (`[Authorize]`) → saldo.
+   - `GET api/wallet/transactions` (`[Authorize]`) → histórico paginado.
+4. Registrar na DI.
+
+**Ficheiros:**
+- Criar: DTOs de wallet, `WalletService.cs`, `IWalletService.cs`, `WalletController.cs`
+- Editar: `Nokubico.Infra.Ioc/ServiceCollectionExtensions.cs`
+
+**Validações/Segurança:**
+- [ ] Só o dono da carteira (ou admin) acede.
+
+**Critérios de aceitação:**
+- [ ] Saldo e histórico a funcionar; histórico imutável (sem edição).
+
+---
+
+# SPRINT 4 — Mensagens, Empresas, Admin, IA e Polimento
+
+---
+
+### [NOK-21] DTOs de Conversas e Mensagens
+
+- **Sprint:** 4 · **Módulo:** Mensagens · **Prioridade:** Alta
+- **Dev:** Dev A · **Dependências:** NOK-01 · **Estimativa:** 0,5 dia
+
+**Objetivo:**
+DTOs do chat (RF003/RF010).
+
+**O que fazer:**
+1. Criar em `Nokubico.Application/DTOs/`:
+   - `CreateConversationDTO` (ParticipantUserIds[], Title?, IsGroup?)
+   - `ConversationDTO` (Id, Title, IsGroup, Participants: `ConversationParticipantDTO[]`, LastMessage? , UpdatedAt)
+   - `ConversationParticipantDTO` (UserId, JoinedAt, LastReadAt)
+   - `SendMessageDTO` (Content?, MessageType, AttachmentUrl?, ReplyToId?)
+   - `MessageDTO` (Id, ConversationId, SenderId, Content, MessageType, CreatedAt, Attachments: `MessageAttachmentDTO[]`)
+   - `MessageAttachmentDTO` (Id, FileUrl, FileName, MimeType)
+2. Criar o mapper correspondente em `Nokubico.Application/Mapping/`.
+
+**Validações/Segurança:**
+- [ ] `MessageDTO` não expõe nada além do necessário.
+
+**Critérios de aceitação:**
+- [ ] DTOs criados.
+
+---
+
+### [NOK-22] MessagingService + ConversationController
+
+- **Sprint:** 4 · **Módulo:** Mensagens · **Prioridade:** Alta
+- **Dev:** Dev A · **Dependências:** NOK-21 · **Estimativa:** 2 dias
+
+**Objetivo:**
+Chat de negociação com verificação de participação (RF003) e anexos (RF010).
+
+**O que fazer:**
+1. Criar `Nokubico.Application/Services/MessagingService.cs` + `IMessagingService`:
+   - `ConversationDTO CreateConversation(Guid userId, CreateConversationDTO dto)` — cria conversa + participantes.
+   - `PagedList<ConversationDTO> GetMyConversations(Guid userId, PaginationParams p)`.
+   - `PagedList<MessageDTO> GetMessages(Guid conversationId, Guid userId, PaginationParams p)` — valida `IsParticipant`.
+   - `MessageDTO SendMessage(Guid conversationId, Guid userId, SendMessageDTO dto)` — se houver attachment, guarda `MessageAttachment`; tipos permitidos conforme `MessageType`.
+   - `void MarkRead(Guid conversationId, Guid userId)` — atualiza `LastReadAt`.
+2. Segurança: **nenhum endpoint devolve dados de conversa sem o utilizador ser participante** (`IsParticipant` do repositório).
+3. Criar `Nokubico.API/Controllers/ConversationController.cs`:
+   - `GET api/conversation`, `POST api/conversation`, `GET api/conversation/{id}/messages`, `POST api/conversation/{id}/messages`, `POST api/conversation/{id}/read` — todos `[Authorize]`.
+4. Registrar na DI.
+
+**Ficheiros:**
+- Criar: `MessagingService.cs`, `IMessagingService.cs`, `ConversationController.cs`
+- Editar: `Nokubico.Infra.Ioc/ServiceCollectionExtensions.cs`
+
+**Validações/Segurança:**
+- [ ] Acesso restrito a participantes (401/403 se não for participante).
+- [ ] `SenderId` de sistema/IA fica nulo; utilizador sempre identificado pelos claims.
+
+**Critérios de aceitação:**
+- [ ] Criar conversa, listar, enviar mensagem com anexo, marcar lido.
+- [ ] Não-participante bloqueado.
+
+---
+
+### [NOK-23] DTOs, CompanyService e CompanyController
+
+- **Sprint:** 4 · **Módulo:** Empresas · **Prioridade:** Média
+- **Dev:** Dev B · **Dependências:** NOK-01 · **Estimativa:** 1,5 dia
+
+**Objetivo:**
+Perfis de empresas/estúdios e membros (RF008).
+
+**O que fazer:**
+1. DTOs: `CreateCompanyDTO` (Name, Description?, Website?), `UpdateCompanyDTO`, `CompanyDTO` (Id, Name, Description, Website, Members: `CompanyMemberDTO[]`, FollowersCount, CreatedAt), `CompanyMemberDTO` (UserId, Role, JoinedAt), `AddMemberDTO` (UserId, Role).
+2. Criar `Nokubico.Application/Services/CompanyService.cs` + `ICompanyService`:
+   - `CompanyDTO Create(Guid ownerId, CreateCompanyDTO dto)` — cria empresa + membro `OWNER`.
+   - `CompanyDTO GetById(Guid id)` (público).
+   - `PagedList<CompanyDTO> GetAll(PaginationParams p)`.
+   - `CompanyDTO Update(Guid companyId, Guid userId, UpdateCompanyDTO dto)` — só OWNER/ADMIN.
+   - `void AddMember(Guid companyId, Guid userId, AddMemberDTO dto)`; `void RemoveMember(...)`.
+   - `void Follow/Unfollow(Guid companyId, Guid userId)`.
+3. Criar `Nokubico.API/Controllers/CompanyController.cs`:
+   - `GET api/company`, `GET api/company/{id}`, `POST api/company`, `PUT api/company/{id}`, `POST api/company/{id}/members`, `POST api/company/{id}/follow` — públicos os GETs, `[Authorize]` o resto.
+4. Registrar na DI.
+
+**Ficheiros:**
+- Criar: DTOs de empresa, `CompanyService.cs`, `ICompanyService.cs`, `CompanyController.cs`
+- Editar: `Nokubico.Infra.Ioc/ServiceCollectionExtensions.cs`
+
+**Validações/Segurança:**
+- [ ] Edição restrita a OWNER/ADMIN; `UNIQUE(companyId, userId)` respeitado.
+
+**Critérios de aceitação:**
+- [ ] CRUD + membros + follow a funcionar.
+
+---
+
+### [NOK-24] AdminController — moderação, disputas e relatórios
+
+- **Sprint:** 4 · **Módulo:** Admin · **Prioridade:** Média
+- **Dev:** Dev C · **Dependências:** NOK-19 · **Estimativa:** 2 dias
+
+**Objetivo:**
+Endpoints administrativos (RF015/RF016/RF017) protegidos por role `Admin`.
+
+**O que fazer:**
+1. Criar `Nokubico.API/Controllers/AdminController.cs` — **todos** os endpoints com `[Authorize(Roles = "Admin")]`:
+   - `GET api/admin/users?role=` → listar utilizadores (paginação) — moderação.
+   - `PUT api/admin/users/{id}/role` → alterar role (nunca rebaixar outro admin).
+   - `PUT api/admin/products/{id}/status` → aprovar/rejeitar produtos (`ProductStatus`).
+   - `GET api/admin/disputes` → listar disputas em aberto (usar `IEscrowService`).
+   - `POST api/admin/disputes/{orderId}/resolve` → resolve release/refund.
+   - `GET api/admin/reports/transactions` → métricas simples: nº de ordens, valor total, nº de utilizadores, por período.
+2. Criar os DTOs de admin se necessário (`AdminUserDTO`, `ResolveDisputeDTO`).
+3. Registrar na DI se criar serviços auxiliares (`AdminService`).
+
+**Ficheiros:**
+- Criar: `Nokubico.API/Controllers/AdminController.cs`, `Nokubico.Application/Services/AdminService.cs` (se fizer sentido), DTOs
+- Editar: `Nokubico.Infra.Ioc/ServiceCollectionExtensions.cs`
+
+**Validações/Segurança:**
+- [ ] Nenhum endpoint admin acessível por role `User`.
+- [ ] Proteção: mesmo admin não pode remover o próprio role.
+
+**Critérios de aceitação:**
+- [ ] Moderação e resolução de disputas via API com role Admin.
+
+---
+
+### [NOK-25] ReportService — reportar conteúdo (comunidade)
+
+- **Sprint:** 4 · **Módulo:** Comunidade · **Prioridade:** Média
+- **Dev:** Dev C · **Dependências:** NOK-12 · **Estimativa:** 1 dia
+
+**Objetivo:**
+Permitir denunciar conteúdo da comunidade (RF014) e expor a lista para moderação.
+
+**O que fazer:**
+1. Criar `CreateReportDTO` (PostId?, CommentId?, Reason, Details?) e `ReportDTO`.
+2. Criar `Nokubico.Application/Services/ReportService.cs` + `IReportService`:
+   - `ReportDTO Submit(Guid reporterId, CreateReportDTO dto)` — valida que o alvo existe; um report por utilizador+alvo (idempotente).
+   - `PagedList<ReportDTO> GetPending(PaginationParams p)` — **admin apenas** (o serviço valida role).
+3. Criar `Nokubico.API/Controllers/ReportController.cs`:
+   - `POST api/report` (`[Authorize]`)
+   - `GET api/report/pending` (`[Authorize(Roles = "Admin")]`)
+4. **Nota:** a tabela `user_report` ainda não existe em código — criar a entidade + configuração + repositório mínimos (ou usar `user_report` planeada) e aplicar migração.
+
+**Ficheiros:**
+- Criar: DTOs de report, `ReportService.cs`, `IReportService.cs`, `ReportController.cs`, entidade `UserReport` + config + repo
+- Editar: `Nokubico.Infra.Ioc/ServiceCollectionExtensions.cs`
+
+**Validações/Segurança:**
+- [ ] Report exige conteúdo alvo existente.
+- [ ] Listagem de pendentes restrita a admin.
+
+**Critérios de aceitação:**
+- [ ] Denúncia registada; admin lista pendentes.
+
+---
+
+### [NOK-26] IIAService + IAService (sugestões de preço) + AIController
+
+- **Sprint:** 4 · **Módulo:** IA · **Prioridade:** Baixa
+- **Dev:** Dev A · **Dependências:** NOK-01 · **Estimativa:** 2 dias
+
+**Objetivo:**
+Agente de IA para sugestão de preços/descontos (RF012), com contrato em Application e implementação em `Infra.Services/AI`.
+
+**O que fazer:**
+1. Criar `Nokubico.Application/Interfaces/IIAService.cs`:
+   - `PriceSuggestionDTO SuggestPrice(CreateProductDTO dto)` — método síncrono (placeholder).
+2. Criar `Nokubico.Application/DTOs/PriceSuggestionDTO.cs` (SuggestedPrice, SuggestedDiscount, Reasoning, Currency).
+3. Criar `Nokubico.Infra.Services/AI/IAService.cs` implementando `IIAService` — **versão 1**: devolve uma sugestão determinística (ex.: média da categoria + margem fixa) sem chamar LLM ainda; deixar pontos de extensão (injeção futura do LLM com `guardrails`).
+4. Criar `Nokubico.API/Controllers/AIController.cs`:
+   - `POST api/ai/price-suggestion` (`[Authorize]`) → recebe `CreateProductDTO`, devolve `PriceSuggestionDTO`.
+5. Registrar `IIAService` → `IAService` na DI.
+
+**Ficheiros:**
+- Criar: `IIAService.cs`, `IAService.cs`, `PriceSuggestionDTO.cs`, `AIController.cs`
+- Editar: `Nokubico.Infra.Ioc/ServiceCollectionExtensions.cs`
+
+**Validações/Segurança:**
+- [ ] Não expor prompt/API key; sugestões limitadas (não ultrapassar intervalo razoável).
+
+**Critérios de aceitação:**
+- [ ] Endpoint devolve sugestão estruturada; estrutura pronta para plugar LLM depois.
+
+---
+
+### [NOK-27] Polimento final — padronização, limpeza e revisão
+
+- **Sprint:** 4 · **Módulo:** Transversal · **Prioridade:** Alta
+- **Dev:** Dev C · **Dependências:** todas as anteriores · **Estimativa:** 2 dias
+
+**Objetivo:**
+Garantir que **todos os controllers** seguem o mesmo padrão, sem código morto, e que a API está documentada e testável.
+
+**O que fazer:**
+1. Rever **todos** os controllers:
+   - Controllers finos (sem lógica de negócio).
+   - DTOs de entrada/saída em todos os endpoints.
+   - `[Authorize]` correto em cada endpoint.
+   - Paginação consistente (devolver `PagedList<T>` ou headers de paginação).
+2. Remover código morto: `WeatherForecastController`, `WeatherForecast.cs`, `Nokubico.API.http` (ou atualizar), `Models/*` antigos que foram migrados para DTOs.
+3. Adicionar `ProducesResponseType` e `[Produces("application/json")]` nos controllers principais para documentação Swagger.
+4. Verificar no Swagger: cada endpoint testável com e sem token; respostas de erro padronizadas.
+5. Rodar `dotnet build` sem erros/warnings e fazer uma **revisão de segurança**: grep por exposição de `Password`, `Token`, `SecretKey` em DTOs/respostas.
+
+**Ficheiros:**
+- Editar: todos os controllers; apagar templates.
+
+**Critérios de aceitação:**
+- [ ] `dotnet build` 0 erros/0 warnings.
+- [ ] Todos os módulos com controller criado (Auth, User, Post, Product, Order, Wallet, Conversation, Company, Upload, Report, Admin, AI).
+- [ ] Nenhum dado sensível vazado em DTOs.
+
+---
+
+## Anexo — Mapa final: módulo → endpoints
+
+| Módulo | Controller | Endpoints principais |
+|--------|-----------|----------------------|
+| Autenticação | `AuthController` | `POST /api/auth/register`, `POST /api/auth/login` |
+| Utilizadores | `UserController` | `GET/PUT/DELETE /api/user/me`, `GET /api/user/{id}` |
+| Comunidade | `PostController` | feed, CRUD, like, comment, share, bookmark |
+| Uploads | `UploadController` | `POST /api/upload/{folder}` |
+| Marketplace | `ProductController` | catálogo, CRUD, publish, reviews |
+| Pedidos | `OrderController` | criar, histórico, confirmar entrega, disputa |
+| Carteira | `WalletController` | saldo, transações |
+| Mensagens | `ConversationController` | conversas, mensagens, anexos, read |
+| Empresas | `CompanyController` | CRUD, membros, follow |
+| Denúncias | `ReportController` | `POST /api/report`, `GET /api/report/pending` |
+| Admin | `AdminController` | users, products status, disputes, reports |
+| IA | `AIController` | `POST /api/ai/price-suggestion` |
+
+> **Fim da linha de trabalho:** todos os controllers criados, com DTOs seguros, serviços com validações e controllers finos.

@@ -13,27 +13,27 @@ namespace Nokubico.Infra.Data.Repository.Auth
         {
         }
 
-        public Account? FindByProviderAndAccountId(string providerId, string accountId)
+        public async Task<Account?> FindByProviderAndAccountId(string providerId, string accountId, CancellationToken cancellationToken = default)
         {
-            return Context.Accounts.FirstOrDefault(a => a.ProviderId == providerId && a.AccountId == accountId);
+            return await Context.Accounts.FirstOrDefaultAsync(a => a.ProviderId == providerId && a.AccountId == accountId, cancellationToken);
         }
 
-        public List<Account> FindByUser(Guid userId)
+        public async Task<List<Account>> FindByUser(Guid userId, CancellationToken cancellationToken = default)
         {
-            return Context.Accounts.Where(a => a.UserId == userId).ToList();
+            return await Context.Accounts.Where(a => a.UserId == userId).ToListAsync(cancellationToken);
         }
 
-        public Account Save(Account account)
+        public async Task<Account> Save(Account account, CancellationToken cancellationToken = default)
         {
             if (!Context.Accounts.Contains(account)) Context.Accounts.Add(account);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync(cancellationToken);
             return account;
         }
 
-        public void Delete(Account account)
+        public async Task Delete(Account account, CancellationToken cancellationToken = default)
         {
             Context.Accounts.Remove(account);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync(cancellationToken);
         }
     }
 }

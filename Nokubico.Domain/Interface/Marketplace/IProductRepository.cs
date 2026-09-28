@@ -6,26 +6,26 @@ namespace Nokubico.Domain.Interface.Marketplace
 {
     public interface IProductRepository
     {
-        Product? FindById(Guid id);
+        Task<Product?> FindById(Guid id, CancellationToken cancellationToken = default);
 
-        Product? FindPublishedById(Guid id);
+        Task<Product?> FindPublishedById(Guid id, CancellationToken cancellationToken = default);
 
-        PagedList<Product> FindPublished(string? category, PaginationParams pagination);
+        Task<PagedList<Product>> FindPublished(string? category, PaginationParams pagination, CancellationToken cancellationToken = default);
 
-        PagedList<Product> FindByCreator(Guid creatorId, PaginationParams pagination);
+        Task<PagedList<Product>> FindByCreator(Guid creatorId, PaginationParams pagination, CancellationToken cancellationToken = default);
 
-        Product Save(Product product);
+        Task<Product> Save(Product product, CancellationToken cancellationToken = default);
 
-        void Delete(Product product);
+        Task Delete(Product product, CancellationToken cancellationToken = default);
 
-        Review? FindReview(Guid productId, Guid userId);
+        Task<Review?> FindReview(Guid productId, Guid userId, CancellationToken cancellationToken = default);
 
-        Review SaveReview(Review review);
+        Task<Review> SaveReview(Review review, CancellationToken cancellationToken = default);
 
-        void DeleteReview(Review review);
+        Task DeleteReview(Review review, CancellationToken cancellationToken = default);
 
-        double GetAverageRating(Guid productId);
+        Task<double> GetAverageRating(Guid productId, CancellationToken cancellationToken = default);
 
-        PagedList<Review> FindReviewsByProduct(Guid productId, PaginationParams pagination);
+        Task<PagedList<Review>> FindReviewsByProduct(Guid productId, PaginationParams pagination, CancellationToken cancellationToken = default);
     }
 }

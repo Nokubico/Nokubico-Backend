@@ -6,24 +6,24 @@ namespace Nokubico.Domain.Interface.Companies
 {
     public interface ICompanyRepository
     {
-        Company? FindById(Guid id);
+        Task<Company?> FindById(Guid id, CancellationToken cancellationToken = default);
 
-        PagedList<Company> FindAll(PaginationParams pagination);
+        Task<PagedList<Company>> FindAll(PaginationParams pagination, CancellationToken cancellationToken = default);
 
-        Company Save(Company company);
+        Task<Company> Save(Company company, CancellationToken cancellationToken = default);
 
-        void Delete(Company company);
+        Task Delete(Company company, CancellationToken cancellationToken = default);
 
-        CompanyMember? FindMember(Guid companyId, Guid userId);
+        Task<CompanyMember?> FindMember(Guid companyId, Guid userId, CancellationToken cancellationToken = default);
 
-        CompanyMember SaveMember(CompanyMember member);
+        Task<CompanyMember> SaveMember(CompanyMember member, CancellationToken cancellationToken = default);
 
-        void DeleteMember(CompanyMember member);
+        Task DeleteMember(CompanyMember member, CancellationToken cancellationToken = default);
 
-        CompanyFollow SaveFollow(CompanyFollow follow);
+        Task<CompanyFollow> SaveFollow(CompanyFollow follow, CancellationToken cancellationToken = default);
 
-        void DeleteFollow(CompanyFollow follow);
+        Task DeleteFollow(CompanyFollow follow, CancellationToken cancellationToken = default);
 
-        bool IsFollowing(Guid companyId, Guid userId);
+        Task<bool> IsFollowing(Guid companyId, Guid userId, CancellationToken cancellationToken = default);
     }
 }

@@ -13,37 +13,37 @@ namespace Nokubico.Infra.Data.Repository.Auth
         {
         }
 
-        public User? FindByEmail(string email)
+        public async Task<User?> FindByEmail(string email, CancellationToken cancellationToken = default)
         {
-            return Context.Users.FirstOrDefault(u => u.Email == email);
+            return await Context.Users.FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
         }
 
-        public User? FindById(Guid id)
+        public async Task<User?> FindById(Guid id, CancellationToken cancellationToken = default)
         {
-            return Context.Users.FirstOrDefault(u => u.Id == id);
+            return await Context.Users.FirstOrDefaultAsync(u => u.Id == id, cancellationToken);
         }
 
-        public User Save(User user)
+        public async Task<User> Save(User user, CancellationToken cancellationToken = default)
         {
             if (!Context.Users.Contains(user)) Context.Users.Add(user);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync(cancellationToken);
             return user;
         }
 
-        public void Delete(User user)
+        public async Task Delete(User user, CancellationToken cancellationToken = default)
         {
             Context.Users.Remove(user);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync(cancellationToken);
         }
 
-        public PagedList<User> FindAll(PaginationParams pagination)
+        public async Task<PagedList<User>> FindAll(PaginationParams pagination, CancellationToken cancellationToken = default)
         {
-            var total = Context.Users.Count();
-            var items = Context.Users
+            var total = await Context.Users.CountAsync(cancellationToken);
+            var items = await Context.Users
                 .OrderBy(u => u.CreatedAt)
                 .Skip(pagination.Offset)
                 .Take(pagination.PageSize)
-                .ToList();
+                .ToListAsync(cancellationToken);
 
             return ToPagedList(items, total, pagination);
         }

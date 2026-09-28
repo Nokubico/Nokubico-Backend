@@ -6,16 +6,16 @@ namespace Nokubico.Domain.Interface.Marketplace
 {
     public interface IOrderRepository
     {
-        Order? FindById(Guid id);
+        Task<Order?> FindById(Guid id, CancellationToken cancellationToken = default);
 
-        Order? FindByIdForUser(Guid id, Guid userId);
+        Task<Order?> FindByIdForUser(Guid id, Guid userId, CancellationToken cancellationToken = default);
 
-        PagedList<Order> FindByBuyer(Guid userId, PaginationParams pagination);
+        Task<PagedList<Order>> FindByBuyer(Guid userId, PaginationParams pagination, CancellationToken cancellationToken = default);
 
-        PagedList<Order> FindBySeller(Guid creatorId, PaginationParams pagination);
+        Task<PagedList<Order>> FindBySeller(Guid creatorId, PaginationParams pagination, CancellationToken cancellationToken = default);
 
-        Order Save(Order order);
+        Task<Order> Save(Order order, CancellationToken cancellationToken = default);
 
-        void Delete(Order order);
+        Task Delete(Order order, CancellationToken cancellationToken = default);
     }
 }

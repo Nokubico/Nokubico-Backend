@@ -13,59 +13,59 @@ namespace Nokubico.Infra.Data.Repository.Marketplace
         {
         }
 
-        public Order? FindById(Guid id)
+        public async Task<Order?> FindById(Guid id, CancellationToken cancellationToken = default)
         {
-            return Context.Orders
+            return await Context.Orders
                 .Include(o => o.Items)
-                .FirstOrDefault(o => o.Id == id);
+                .FirstOrDefaultAsync(o => o.Id == id, cancellationToken);
         }
 
-        public Order? FindByIdForUser(Guid id, Guid userId)
+        public async Task<Order?> FindByIdForUser(Guid id, Guid userId, CancellationToken cancellationToken = default)
         {
-            return Context.Orders
+            return await Context.Orders
                 .Include(o => o.Items)
-                .FirstOrDefault(o => o.Id == id && o.UserId == userId);
+                .FirstOrDefaultAsync(o => o.Id == id && o.UserId == userId, cancellationToken);
         }
 
-        public PagedList<Order> FindByBuyer(Guid userId, PaginationParams pagination)
+        public async Task<PagedList<Order>> FindByBuyer(Guid userId, PaginationParams pagination, CancellationToken cancellationToken = default)
         {
             var query = Context.Orders.Where(o => o.UserId == userId);
-            var total = query.Count();
-            var items = query
+            var total = await query.CountAsync(cancellationToken);
+            var items = await query
                 .Include(o => o.Items)
                 .OrderByDescending(o => o.CreatedAt)
                 .Skip(pagination.Offset)
                 .Take(pagination.PageSize)
-                .ToList();
+                .ToListAsync(cancellationToken);
 
             return ToPagedList(items, total, pagination);
         }
 
-        public PagedList<Order> FindBySeller(Guid creatorId, PaginationParams pagination)
+        public async Task<PagedList<Order>> FindBySeller(Guid creatorId, PaginationParams pagination, CancellationToken cancellationToken = default)
         {
-            var query = Context.Orders.Where(o => o.Items.Any(i => i.Product.CreatorId == creatorId));
-            var total = query.Count();
-            var items = query
+            var query = Context.Orders.Where(o => o.Items.Any(i => i.Product != null && i.Product.CreatorId == creatorId));
+            var total = await query.CountAsync(cancellationToken);
+            var items = await query
                 .Include(o => o.Items)
                 .OrderByDescending(o => o.CreatedAt)
                 .Skip(pagination.Offset)
                 .Take(pagination.PageSize)
-                .ToList();
+                .ToListAsync(cancellationToken);
 
             return ToPagedList(items, total, pagination);
         }
 
-        public Order Save(Order order)
+        public async Task<Order> Save(Order order, CancellationToken cancellationToken = default)
         {
             if (!Context.Orders.Contains(order)) Context.Orders.Add(order);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync(cancellationToken);
             return order;
         }
 
-        public void Delete(Order order)
+        public async Task Delete(Order order, CancellationToken cancellationToken = default)
         {
             Context.Orders.Remove(order);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync(cancellationToken);
         }
     }
 }

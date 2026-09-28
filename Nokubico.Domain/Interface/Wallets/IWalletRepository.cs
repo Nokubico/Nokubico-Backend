@@ -2,18 +2,18 @@
 using Nokubico.Domain.Entities;
 using Nokubico.Domain.Pagination;
 
-namespace Nokubico.Domain.Interface.Walletss
+namespace Nokubico.Domain.Interface.Wallets
 {
     public interface IWalletRepository
     {
-        Wallet? FindByUserId(Guid userId);
+        Task<Wallet?> FindByUserId(Guid userId, CancellationToken cancellationToken = default);
 
-        Wallet? FindById(Guid id);
+        Task<Wallet?> FindById(Guid id, CancellationToken cancellationToken = default);
 
-        PagedList<WalletTx> FindTransactions(Guid walletId, PaginationParams pagination);
+        Task<PagedList<WalletTx>> FindTransactions(Guid walletId, PaginationParams pagination, CancellationToken cancellationToken = default);
 
-        Wallet Save(Wallet wallet);
+        Task<Wallet> Save(Wallet wallet, CancellationToken cancellationToken = default);
 
-        WalletTx SaveTransaction(WalletTx transaction);
+        Task<WalletTx> SaveTransaction(WalletTx transaction, CancellationToken cancellationToken = default);
     }
 }

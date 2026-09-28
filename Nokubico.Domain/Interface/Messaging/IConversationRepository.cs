@@ -6,18 +6,18 @@ namespace Nokubico.Domain.Interface.Messaging
 {
     public interface IConversationRepository
     {
-        Conversation? FindById(Guid id);
+        Task<Conversation?> FindById(Guid id, CancellationToken cancellationToken = default);
 
-        PagedList<Conversation> FindByUser(Guid userId, PaginationParams pagination);
+        Task<PagedList<Conversation>> FindByUser(Guid userId, PaginationParams pagination, CancellationToken cancellationToken = default);
 
-        Conversation Save(Conversation conversation);
+        Task<Conversation> Save(Conversation conversation, CancellationToken cancellationToken = default);
 
-        Message SaveMessage(Message message);
+        Task<Message> SaveMessage(Message message, CancellationToken cancellationToken = default);
 
-        MessageAttachment SaveAttachment(MessageAttachment attachment);
+        Task<MessageAttachment> SaveAttachment(MessageAttachment attachment, CancellationToken cancellationToken = default);
 
-        bool IsParticipant(Guid conversationId, Guid userId);
+        Task<bool> IsParticipant(Guid conversationId, Guid userId, CancellationToken cancellationToken = default);
 
-        PagedList<Message> FindMessages(Guid conversationId, PaginationParams pagination);
+        Task<PagedList<Message>> FindMessages(Guid conversationId, PaginationParams pagination, CancellationToken cancellationToken = default);
     }
 }

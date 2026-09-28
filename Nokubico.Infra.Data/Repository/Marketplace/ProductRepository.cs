@@ -14,23 +14,23 @@ namespace Nokubico.Infra.Data.Repository.Marketplace
         {
         }
 
-        public Product? FindById(Guid id)
+        public async Task<Product?> FindById(Guid id, CancellationToken cancellationToken = default)
         {
-            return Context.Products
+            return await Context.Products
                 .Include(p => p.Images)
                 .Include(p => p.Creator)
-                .FirstOrDefault(p => p.Id == id);
+                .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
         }
 
-        public Product? FindPublishedById(Guid id)
+        public async Task<Product?> FindPublishedById(Guid id, CancellationToken cancellationToken = default)
         {
-            return Context.Products
+            return await Context.Products
                 .Include(p => p.Images)
                 .Include(p => p.Creator)
-                .FirstOrDefault(p => p.Id == id && p.Status == ProductStatus.Published);
+                .FirstOrDefaultAsync(p => p.Id == id && p.Status == ProductStatus.Published, cancellationToken);
         }
 
-        public PagedList<Product> FindPublished(string? category, PaginationParams pagination)
+        public async Task<PagedList<Product>> FindPublished(string? category, PaginationParams pagination, CancellationToken cancellationToken = default)
         {
             var query = Context.Products.Where(p => p.Status == ProductStatus.Published);
 
@@ -39,68 +39,68 @@ namespace Nokubico.Infra.Data.Repository.Marketplace
                 query = query.Where(p => p.Category == category);
             }
 
-            var total = query.Count();
-            var items = query
+            var total = await query.CountAsync(cancellationToken);
+            var items = await query
                 .Include(p => p.Images)
                 .OrderByDescending(p => p.CreatedAt)
                 .Skip(pagination.Offset)
                 .Take(pagination.PageSize)
-                .ToList();
+                .ToListAsync(cancellationToken);
 
             return ToPagedList(items, total, pagination);
         }
 
-        public PagedList<Product> FindByCreator(Guid creatorId, PaginationParams pagination)
+        public async Task<PagedList<Product>> FindByCreator(Guid creatorId, PaginationParams pagination, CancellationToken cancellationToken = default)
         {
             var query = Context.Products.Where(p => p.CreatorId == creatorId);
-            var total = query.Count();
-            var items = query
+            var total = await query.CountAsync(cancellationToken);
+            var items = await query
                 .Include(p => p.Images)
                 .OrderByDescending(p => p.CreatedAt)
                 .Skip(pagination.Offset)
                 .Take(pagination.PageSize)
-                .ToList();
+                .ToListAsync(cancellationToken);
 
             return ToPagedList(items, total, pagination);
         }
 
-        public Product Save(Product product)
+        public async Task<Product> Save(Product product, CancellationToken cancellationToken = default)
         {
             if (!Context.Products.Contains(product)) Context.Products.Add(product);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync(cancellationToken);
             return product;
         }
 
-        public void Delete(Product product)
+        public async Task Delete(Product product, CancellationToken cancellationToken = default)
         {
             Context.Products.Remove(product);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync(cancellationToken);
         }
 
-        public Review? FindReview(Guid productId, Guid userId)
+        public async Task<Review?> FindReview(Guid productId, Guid userId, CancellationToken cancellationToken = default)
         {
-            return Context.Reviews.FirstOrDefault(r => r.ProductId == productId && r.UserId == userId);
+            return await Context.Reviews.FirstOrDefaultAsync(r => r.ProductId == productId && r.UserId == userId, cancellationToken);
         }
 
-        public Review SaveReview(Review review)
+        public async Task<Review> SaveReview(Review review, CancellationToken cancellationToken = default)
         {
             if (!Context.Reviews.Contains(review)) Context.Reviews.Add(review);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync(cancellationToken);
             return review;
         }
 
-        public void DeleteReview(Review review)
+        public async Task DeleteReview(Review review, CancellationToken cancellationToken = default)
         {
             Context.Reviews.Remove(review);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync(cancellationToken);
         }
 
-        public double GetAverageRating(Guid productId)
+        public async Task<double> GetAverageRating(Guid productId, CancellationToken cancellationToken = default)
         {
-            var ratings = Context.Reviews
+            var ratings = await Context.Reviews
                 .Where(r => r.ProductId == productId)
                 .Select(r => r.Rating)
-                .ToList();
+                .ToListAsync(cancellationToken);
 
             if (ratings.Count == 0)
             {
@@ -116,16 +116,16 @@ namespace Nokubico.Infra.Data.Repository.Marketplace
             return (double)sum / ratings.Count;
         }
 
-        public PagedList<Review> FindReviewsByProduct(Guid productId, PaginationParams pagination)
+        public async Task<PagedList<Review>> FindReviewsByProduct(Guid productId, PaginationParams pagination, CancellationToken cancellationToken = default)
         {
             var query = Context.Reviews.Where(r => r.ProductId == productId);
-            var total = query.Count();
-            var items = query
+            var total = await query.CountAsync(cancellationToken);
+            var items = await query
                 .Include(r => r.User)
                 .OrderByDescending(r => r.CreatedAt)
                 .Skip(pagination.Offset)
                 .Take(pagination.PageSize)
-                .ToList();
+                .ToListAsync(cancellationToken);
 
             return ToPagedList(items, total, pagination);
         }

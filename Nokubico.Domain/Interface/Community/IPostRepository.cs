@@ -6,44 +6,44 @@ namespace Nokubico.Domain.Interface.Community
 {
     public interface IPostRepository
     {
-        Post? FindById(Guid id);
+        Task<Post?> FindById(Guid id, CancellationToken cancellationToken = default);
 
-        PagedList<Post> FindFeed(PaginationParams pagination);
+        Task<PagedList<Post>> FindFeed(PaginationParams pagination, CancellationToken cancellationToken = default);
 
-        PagedList<Post> FindByAuthor(Guid authorId, PaginationParams pagination);
+        Task<PagedList<Post>> FindByAuthor(Guid authorId, PaginationParams pagination, CancellationToken cancellationToken = default);
 
-        Post Save(Post post);
+        Task<Post> Save(Post post, CancellationToken cancellationToken = default);
 
-        void Delete(Post post);
+        Task Delete(Post post, CancellationToken cancellationToken = default);
 
-        Like? FindLike(Guid postId, Guid userId);
+        Task<Like?> FindLike(Guid postId, Guid userId, CancellationToken cancellationToken = default);
 
-        Like SaveLike(Like like);
+        Task<Like> SaveLike(Like like, CancellationToken cancellationToken = default);
 
-        void DeleteLike(Like like);
+        Task DeleteLike(Like like, CancellationToken cancellationToken = default);
 
-        Comment SaveComment(Comment comment);
+        Task<Comment> SaveComment(Comment comment, CancellationToken cancellationToken = default);
 
-        void DeleteComment(Comment comment);
+        Task DeleteComment(Comment comment, CancellationToken cancellationToken = default);
 
-        PagedList<Comment> FindCommentsByPost(Guid postId, PaginationParams pagination);
+        Task<PagedList<Comment>> FindCommentsByPost(Guid postId, PaginationParams pagination, CancellationToken cancellationToken = default);
 
-        Share SaveShare(Share share);
+        Task<Share> SaveShare(Share share, CancellationToken cancellationToken = default);
 
-        void DeleteShare(Share share);
+        Task DeleteShare(Share share, CancellationToken cancellationToken = default);
 
-        bool IsSharedBy(Guid postId, Guid userId);
+        Task<bool> IsSharedBy(Guid postId, Guid userId, CancellationToken cancellationToken = default);
 
-        Bookmark SaveBookmark(Bookmark bookmark);
+        Task<Bookmark> SaveBookmark(Bookmark bookmark, CancellationToken cancellationToken = default);
 
-        void DeleteBookmark(Bookmark bookmark);
+        Task DeleteBookmark(Bookmark bookmark, CancellationToken cancellationToken = default);
 
-        bool IsBookmarkedBy(Guid postId, Guid userId);
+        Task<bool> IsBookmarkedBy(Guid postId, Guid userId, CancellationToken cancellationToken = default);
 
-        long CountLikes(Guid postId);
+        Task<long> CountLikes(Guid postId, CancellationToken cancellationToken = default);
 
-        long CountComments(Guid postId);
+        Task<long> CountComments(Guid postId, CancellationToken cancellationToken = default);
 
-        long CountShares(Guid postId);
+        Task<long> CountShares(Guid postId, CancellationToken cancellationToken = default);
     }
 }
