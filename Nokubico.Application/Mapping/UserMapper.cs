@@ -25,8 +25,8 @@ public static class UserMapper
         };
     }
 
-    // Registration always starts with the ordinary user role. Credentials are
-    // handled by the authentication service, never copied onto the user entity.
+    // O registo cria sempre um utilizador comum. As credenciais são tratadas
+    // pelo serviço de autenticação e nunca copiadas para a entidade User.
     public static User ToEntity(RegisterDTO dto)
     {
         ArgumentNullException.ThrowIfNull(dto);
@@ -35,8 +35,8 @@ public static class UserMapper
         return Apply(dto, user);
     }
 
-    // Apply registration profile fields to a user created by authentication.
-    // Do not change its identity, email, role, verification or credentials.
+    // Aplica os campos de perfil do registo a um utilizador criado pela autenticação.
+    // Preserva a identidade, o email, o papel, a verificação e as credenciais.
     public static User Apply(RegisterDTO dto, User user)
     {
         ArgumentNullException.ThrowIfNull(dto);
@@ -47,7 +47,7 @@ public static class UserMapper
         return user;
     }
 
-    // Full profile replacement: null optional fields clear the stored values.
+    // Substitui o perfil completo: campos opcionais nulos limpam os valores guardados.
     public static User Apply(UserUpdateDTO dto, User user)
     {
         ArgumentNullException.ThrowIfNull(dto);

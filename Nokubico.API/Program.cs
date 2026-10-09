@@ -2,19 +2,19 @@ using Nokubico.Infra.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Adiciona os serviços ao contentor.
 builder.Services.AddControllers();
 
-// Register infrastructure (DbContext, etc.)
+// Regista a infraestrutura, incluindo o contexto da base de dados.
 builder.Services.AddInfrastructure(builder.Configuration);
 
-// Swagger (OpenAPI)
+// Configura a documentação Swagger (OpenAPI).
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configura o processamento dos pedidos HTTP.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

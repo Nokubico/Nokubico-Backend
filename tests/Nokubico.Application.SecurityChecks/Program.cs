@@ -5,7 +5,7 @@ using Nokubico.Application.Mapping;
 using Nokubico.Domain.Entities;
 using Nokubico.Domain.Enums;
 
-// Run with: dotnet run --project tests/Nokubico.Application.SecurityChecks
+// Executar com: dotnet run --project tests/Nokubico.Application.SecurityChecks
 var checks = new (string Name, Action Run)[]
 {
     ("User output exposes only the approved contract", () =>
