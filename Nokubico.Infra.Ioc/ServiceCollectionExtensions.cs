@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Nokubico.Application.Interfaces;
+using Nokubico.Application.Services;
 using Nokubico.Domain.Account;
 using Nokubico.Domain.Interface.Auth;
 using Nokubico.Domain.Interface.Companies;
@@ -66,6 +67,7 @@ namespace Nokubico.Infra.Ioc
             services.AddScoped<ICompanyRepository>(r => new CompanyRepository(r.GetRequiredService<AppDbContext>()));
 
             services.AddScoped<IAuthenticate, AuthenticateServices>();
+            services.AddScoped<IUserService, UserService>();
 
             var storagePath = configuration["Storage:BasePath"] ?? "uploads";
             services.AddScoped<IStorageService>(r => new StorageService(storagePath));

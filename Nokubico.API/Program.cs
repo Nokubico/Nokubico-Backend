@@ -1,3 +1,4 @@
+using Nokubico.API.Middleware;
 using Nokubico.Infra.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+// Middleware de tratamento centralizado de exceções (DEVE SER O PRIMEIRO)
+app.UseExceptionMiddleware();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

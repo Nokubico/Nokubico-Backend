@@ -6,12 +6,12 @@ namespace Nokubico.Domain.Interface.Auth
 {
     public interface IAccountRepository
     {
-        Task<Nokubico.Domain.Entities.Account?> FindByProviderAndAccountId(string providerId, string accountId, CancellationToken cancellationToken = default);
+        Task<Entities.Account?> FindByProviderAndAccountId(string providerId, string accountId, CancellationToken cancellationToken = default);
 
-        Task<List<Nokubico.Domain.Entities.Account>> FindByUser(Guid userId, CancellationToken cancellationToken = default);
+        Task<List<Entities.Account>> FindByUser(Guid userId, CancellationToken cancellationToken = default);
 
-        Task<Nokubico.Domain.Entities.Account> Save(Nokubico.Domain.Entities.Account account, CancellationToken cancellationToken = default);
+        Task<Entities.Account> Save(Entities.Account account, CancellationToken cancellationToken = default);
 
-        Task Delete(Nokubico.Domain.Entities.Account account, CancellationToken cancellationToken = default);
+        Task Delete(Entities.Account account, CancellationToken cancellationToken = default);
     }
 }

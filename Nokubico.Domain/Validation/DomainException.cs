@@ -1,0 +1,16 @@
+namespace Nokubico.Domain.Validation;
+
+/// <summary>
+/// Exceção base para erros de domínio (regras de negócio).
+/// </summary>
+public class DomainException : Exception
+{
+    public DomainException(string message) : base(message)
+    {
+    }
+
+    public DomainException(string message, Exception innerException)
+        : base(message, innerException)
+    {
+    }
+}
