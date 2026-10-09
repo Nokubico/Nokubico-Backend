@@ -25,8 +25,7 @@ public static class UserMapper
         };
     }
 
-    // O registo cria sempre um utilizador comum. As credenciais são tratadas
-    // pelo serviço de autenticação e nunca copiadas para a entidade User.
+    // Cria um utilizador comum. As credenciais ficam na autenticação.
     public static User ToEntity(RegisterDTO dto)
     {
         ArgumentNullException.ThrowIfNull(dto);
@@ -35,8 +34,7 @@ public static class UserMapper
         return Apply(dto, user);
     }
 
-    // Aplica os campos de perfil do registo a um utilizador criado pela autenticação.
-    // Preserva a identidade, o email, o papel, a verificação e as credenciais.
+    // Atualiza apenas o nome e a profissão.
     public static User Apply(RegisterDTO dto, User user)
     {
         ArgumentNullException.ThrowIfNull(dto);
@@ -47,7 +45,7 @@ public static class UserMapper
         return user;
     }
 
-    // Substitui o perfil completo: campos opcionais nulos limpam os valores guardados.
+    // Atualiza o perfil. Campos opcionais nulos limpam os valores guardados.
     public static User Apply(UserUpdateDTO dto, User user)
     {
         ArgumentNullException.ThrowIfNull(dto);

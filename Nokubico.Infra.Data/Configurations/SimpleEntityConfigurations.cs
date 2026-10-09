@@ -4,7 +4,7 @@ using Nokubico.Domain.Entities;
 
 namespace Nokubico.Infra.Data.Configurations
 {
-    // Agrupa configurações de entidades simples para evitar ficheiros com comportamento trivial.
+    // Agrupa as configurações das entidades simples.
     public class LikeConfiguration : IEntityTypeConfiguration<Like>
     {
         public void Configure(EntityTypeBuilder<Like> builder)
