@@ -24,7 +24,7 @@ namespace Nokubico.Domain.Entities
         {
         }
 
-        public Product(string title, string slug, string category, long price, string currency, Guid creatorId)
+        public Product(string title, string? slug, string category, long price, string currency, Guid creatorId)
         {
             Title = title;
             Slug = slug;
@@ -61,6 +61,35 @@ namespace Nokubico.Domain.Entities
         public void SetCurrency(string currency)
         {
             Currency = currency;
+            Touch();
+        }
+
+        public void SetDetails(string? slug, string? description, string? category, string? license, string? thumbnail)
+        {
+            Slug = slug;
+            Description = description;
+            Category = category;
+            License = license;
+            Thumbnail = thumbnail;
+            Touch();
+        }
+
+        public void ReplaceImages(IReadOnlyCollection<string> imageUrls)
+        {
+            ArgumentNullException.ThrowIfNull(imageUrls);
+
+            if (imageUrls.Count > short.MaxValue + 1)
+                throw new ArgumentOutOfRangeException(nameof(imageUrls), "O produto excede o limite de imagens.");
+
+            Images.Clear();
+
+            var position = 0;
+            foreach (var imageUrl in imageUrls)
+            {
+                Images.Add(new ProductImage(this, imageUrl, checked((short)position)));
+                position++;
+            }
+
             Touch();
         }
 

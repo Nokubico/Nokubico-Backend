@@ -51,13 +51,7 @@ public static class PostMapper
     /// </summary>
     public static UserSummaryDTO ToUserSummary(User user)
     {
-        ArgumentNullException.ThrowIfNull(user);
-
-        return new UserSummaryDTO(
-            Id: user.Id,
-            Name: user.Name,
-            Image: user.Image,
-            Profession: user.Profession);
+        return UserMapper.ToSummaryDto(user);
     }
 
     /// <summary>
