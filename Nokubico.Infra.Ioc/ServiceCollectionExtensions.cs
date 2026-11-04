@@ -68,6 +68,7 @@ namespace Nokubico.Infra.Ioc
 
             services.AddScoped<IAuthenticate, AuthenticateServices>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IProductService, ProductService>();
 
             var storagePath = configuration["Storage:BasePath"] ?? "uploads";
             services.AddScoped<IStorageService>(r => new StorageService(storagePath));

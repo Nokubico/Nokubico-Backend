@@ -22,6 +22,17 @@ public static class UserMapper
             user.CreatedAt);
     }
 
+    public static UserSummaryDTO ToSummaryDto(User user)
+    {
+        ArgumentNullException.ThrowIfNull(user);
+
+        return new UserSummaryDTO(
+            user.Id,
+            user.Name,
+            user.Image,
+            user.Profession);
+    }
+
     public static User Apply(UserUpdateDTO dto, User user)
     {
         ArgumentNullException.ThrowIfNull(dto);

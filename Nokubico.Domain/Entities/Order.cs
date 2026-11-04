@@ -5,6 +5,9 @@ namespace Nokubico.Domain.Entities
 {
     public class Order : BaseEntity
     {
+        public const string PaymentStatusEscrowHold = "ESCROW_HOLD";
+        public const string PaymentStatusReleased = "RELEASED";
+
         public Guid UserId { get; private set; }
         public long Total { get; private set; }
         public string Currency { get; private set; } = "USD";

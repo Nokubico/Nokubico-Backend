@@ -25,6 +25,7 @@ namespace Nokubico.Infra.Data.Repository.Marketplace
         public async Task<Product?> FindPublishedById(Guid id, CancellationToken cancellationToken = default)
         {
             return await Context.Products
+                .AsNoTracking()
                 .Include(p => p.Images)
                 .Include(p => p.Creator)
                 .FirstOrDefaultAsync(p => p.Id == id && p.Status == ProductStatus.Published, cancellationToken);
@@ -32,17 +33,20 @@ namespace Nokubico.Infra.Data.Repository.Marketplace
 
         public async Task<PagedList<Product>> FindPublished(string? category, PaginationParams pagination, CancellationToken cancellationToken = default)
         {
-            var query = Context.Products.Where(p => p.Status == ProductStatus.Published);
+            var query = Context.Products.AsNoTracking().Where(p => p.Status == ProductStatus.Published);
 
-            if (category != null && category.Trim().Length > 0)
+            if (!string.IsNullOrWhiteSpace(category))
             {
-                query = query.Where(p => p.Category == category);
+                var normalizedCategory = category.Trim();
+                query = query.Where(p => p.Category == normalizedCategory);
             }
 
             var total = await query.CountAsync(cancellationToken);
             var items = await query
                 .Include(p => p.Images)
+                .Include(p => p.Creator)
                 .OrderByDescending(p => p.CreatedAt)
+                .ThenBy(p => p.Id)
                 .Skip(pagination.Offset)
                 .Take(pagination.PageSize)
                 .ToListAsync(cancellationToken);
@@ -52,11 +56,13 @@ namespace Nokubico.Infra.Data.Repository.Marketplace
 
         public async Task<PagedList<Product>> FindByCreator(Guid creatorId, PaginationParams pagination, CancellationToken cancellationToken = default)
         {
-            var query = Context.Products.Where(p => p.CreatorId == creatorId);
+            var query = Context.Products.AsNoTracking().Where(p => p.CreatorId == creatorId);
             var total = await query.CountAsync(cancellationToken);
             var items = await query
                 .Include(p => p.Images)
+                .Include(p => p.Creator)
                 .OrderByDescending(p => p.CreatedAt)
+                .ThenBy(p => p.Id)
                 .Skip(pagination.Offset)
                 .Take(pagination.PageSize)
                 .ToListAsync(cancellationToken);
@@ -75,6 +81,19 @@ namespace Nokubico.Infra.Data.Repository.Marketplace
         {
             Context.Products.Remove(product);
             await Context.SaveChangesAsync(cancellationToken);
+        }
+
+        public async Task<bool> SlugExists(
+            string slug,
+            Guid? excludingProductId = null,
+            CancellationToken cancellationToken = default)
+        {
+            var query = Context.Products.Where(product => product.Slug == slug);
+
+            if (excludingProductId.HasValue)
+                query = query.Where(product => product.Id != excludingProductId.Value);
+
+            return await query.AnyAsync(cancellationToken);
         }
 
         public async Task<Review?> FindReview(Guid productId, Guid userId, CancellationToken cancellationToken = default)
@@ -97,23 +116,35 @@ namespace Nokubico.Infra.Data.Repository.Marketplace
 
         public async Task<double> GetAverageRating(Guid productId, CancellationToken cancellationToken = default)
         {
-            var ratings = await Context.Reviews
+            return await Context.Reviews
                 .Where(r => r.ProductId == productId)
-                .Select(r => r.Rating)
+                .Select(r => (double?)r.Rating)
+                .AverageAsync(cancellationToken) ?? 0;
+        }
+
+        public async Task<IReadOnlyDictionary<Guid, ProductReviewStatistics>> GetReviewStatistics(
+            IReadOnlyCollection<Guid> productIds,
+            CancellationToken cancellationToken = default)
+        {
+            ArgumentNullException.ThrowIfNull(productIds);
+
+            if (productIds.Count == 0)
+                return new Dictionary<Guid, ProductReviewStatistics>();
+
+            var statistics = await Context.Reviews
+                .Where(review => productIds.Contains(review.ProductId))
+                .GroupBy(review => review.ProductId)
+                .Select(group => new
+                {
+                    ProductId = group.Key,
+                    AverageRating = group.Average(review => (double)review.Rating),
+                    ReviewsCount = group.Count()
+                })
                 .ToListAsync(cancellationToken);
 
-            if (ratings.Count == 0)
-            {
-                return 0.0;
-            }
-
-            var sum = 0;
-            foreach (var rating in ratings)
-            {
-                sum += rating;
-            }
-
-            return (double)sum / ratings.Count;
+            return statistics.ToDictionary(
+                item => item.ProductId,
+                item => new ProductReviewStatistics(item.AverageRating, item.ReviewsCount));
         }
 
         public async Task<PagedList<Review>> FindReviewsByProduct(Guid productId, PaginationParams pagination, CancellationToken cancellationToken = default)
