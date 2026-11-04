@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
 using Nokubico.Domain.Enums;
+using Nokubico.Domain.Validation;
 
 namespace Nokubico.Domain.Entities
 {
     public class Product : BaseEntity
     {
+        public const int MaximumImages = 10;
+
         public string? Title { get; private set; }
         public string? Slug { get; private set; }
         public string? Description { get; private set; }
@@ -78,8 +81,14 @@ namespace Nokubico.Domain.Entities
         {
             ArgumentNullException.ThrowIfNull(imageUrls);
 
-            if (imageUrls.Count > short.MaxValue + 1)
-                throw new ArgumentOutOfRangeException(nameof(imageUrls), "O produto excede o limite de imagens.");
+            if (imageUrls.Count > MaximumImages)
+                throw new DomainException($"Um produto pode ter no máximo {MaximumImages} imagens.");
+
+            if (imageUrls.Any(string.IsNullOrWhiteSpace))
+                throw new DomainException("Os URLs das imagens não podem estar vazios.");
+
+            if (imageUrls.Distinct(StringComparer.Ordinal).Count() != imageUrls.Count)
+                throw new DomainException("Os URLs das imagens não podem repetir-se.");
 
             Images.Clear();
 
@@ -90,6 +99,24 @@ namespace Nokubico.Domain.Entities
                 position++;
             }
 
+            Touch();
+        }
+
+        public void Publish()
+        {
+            if (Status != ProductStatus.Draft)
+                throw new DomainException("Só é possível publicar um produto em rascunho.");
+
+            Status = ProductStatus.Published;
+            Touch();
+        }
+
+        public void Disable()
+        {
+            if (Status != ProductStatus.Published)
+                throw new DomainException("Só é possível desativar um produto publicado.");
+
+            Status = ProductStatus.Disabled;
             Touch();
         }
 

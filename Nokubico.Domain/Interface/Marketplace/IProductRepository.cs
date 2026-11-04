@@ -4,6 +4,8 @@ using Nokubico.Domain.Pagination;
 
 namespace Nokubico.Domain.Interface.Marketplace
 {
+    public readonly record struct ProductReviewStatistics(double AverageRating, int ReviewsCount);
+
     public interface IProductRepository
     {
         Task<Product?> FindById(Guid id, CancellationToken cancellationToken = default);
@@ -18,6 +20,8 @@ namespace Nokubico.Domain.Interface.Marketplace
 
         Task Delete(Product product, CancellationToken cancellationToken = default);
 
+        Task<bool> SlugExists(string slug, Guid? excludingProductId = null, CancellationToken cancellationToken = default);
+
         Task<Review?> FindReview(Guid productId, Guid userId, CancellationToken cancellationToken = default);
 
         Task<Review> SaveReview(Review review, CancellationToken cancellationToken = default);
@@ -25,6 +29,10 @@ namespace Nokubico.Domain.Interface.Marketplace
         Task DeleteReview(Review review, CancellationToken cancellationToken = default);
 
         Task<double> GetAverageRating(Guid productId, CancellationToken cancellationToken = default);
+
+        Task<IReadOnlyDictionary<Guid, ProductReviewStatistics>> GetReviewStatistics(
+            IReadOnlyCollection<Guid> productIds,
+            CancellationToken cancellationToken = default);
 
         Task<PagedList<Review>> FindReviewsByProduct(Guid productId, PaginationParams pagination, CancellationToken cancellationToken = default);
     }

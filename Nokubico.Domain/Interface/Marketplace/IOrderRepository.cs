@@ -14,6 +14,8 @@ namespace Nokubico.Domain.Interface.Marketplace
 
         Task<PagedList<Order>> FindBySeller(Guid creatorId, PaginationParams pagination, CancellationToken cancellationToken = default);
 
+        Task<bool> HasConfirmedPurchase(Guid buyerId, Guid productId, CancellationToken cancellationToken = default);
+
         Task<Order> Save(Order order, CancellationToken cancellationToken = default);
 
         Task Delete(Order order, CancellationToken cancellationToken = default);

@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Nokubico.Domain.Validation;
 
 namespace Nokubico.Application.DTOs;
 
@@ -10,8 +11,7 @@ public record CreateReviewDTO(
     {
         if (Rating is < 1 or > 5)
         {
-            throw new ArgumentOutOfRangeException(
-                nameof(Rating), Rating, "A avaliação deve estar entre 1 e 5.");
+            throw new DomainException("A avaliação deve estar entre 1 e 5.");
         }
     }
 }

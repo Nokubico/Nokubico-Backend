@@ -55,6 +55,19 @@ namespace Nokubico.Infra.Data.Repository.Marketplace
             return ToPagedList(items, total, pagination);
         }
 
+        public Task<bool> HasConfirmedPurchase(
+            Guid buyerId,
+            Guid productId,
+            CancellationToken cancellationToken = default)
+        {
+            return Context.Orders
+                .Where(order =>
+                    order.UserId == buyerId
+                    && (order.PaymentStatus == Order.PaymentStatusEscrowHold
+                        || order.PaymentStatus == Order.PaymentStatusReleased))
+                .AnyAsync(order => order.Items.Any(item => item.ProductId == productId), cancellationToken);
+        }
+
         public async Task<Order> Save(Order order, CancellationToken cancellationToken = default)
         {
             if (!Context.Orders.Contains(order)) Context.Orders.Add(order);

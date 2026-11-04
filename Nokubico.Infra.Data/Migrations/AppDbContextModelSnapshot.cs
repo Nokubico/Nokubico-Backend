@@ -517,6 +517,9 @@ namespace Nokubico.Infra.Data.Migrations
 
                     b.HasIndex("CreatorId");
 
+                    b.HasIndex("Slug")
+                        .IsUnique();
+
                     b.ToTable("product", (string)null);
                 });
 
